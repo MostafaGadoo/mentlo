@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "477343370722",
+    "project_id": "mentlo-7ffb6",
+    "storage_bucket": "mentlo-7ffb6.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:477343370722:android:b2e83fa80016791f7a7dbb",
+        "android_client_info": {
+          "package_name": "com.example.mentlo"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "477343370722-127qq08driopv58vpe10n2hp7maquvfh.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.mentlo",
+            "certificate_hash": "864c46c574b2d4689bf881f279907b2c1cb88818"
+          }
+        },
+        {
+          "client_id": "477343370722-ghe03r6d6lj4uiok7sdkmdb9g3lger6e.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDgNbgYjwXds_wp7Ic7s6Qc_2ZC0EdTXlU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "477343370722-ghe03r6d6lj4uiok7sdkmdb9g3lger6e.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
