@@ -14,12 +14,12 @@ class SignUpWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocConsumer<AuthenticationBloc, AuthenticationState>(
       listener: (context, state) {
-        // if(state is SignUpErrorState){
-        //   showToast(
-        //       msg: state.error,
-        //       state: ToastState.ERROR
-        //   );
-        // }
+        if(state is SignUpErrorState){
+          showToast(
+              msg: 'Please check the entered data',
+              state: ToastState.ERROR
+          );
+        }
       },
       builder: (context, state) {
         AuthenticationBloc cubit = AuthenticationBloc.get(context);
