@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mentlo/features/sign_up/page/sigin_up_screen.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class BoardingModel {
@@ -46,21 +47,29 @@ class _OnBoardingWidgetState extends State<OnBoardingWidget> {
   Widget build(BuildContext context) {
 
     PageController scrollController = PageController();
-    int isLast = 0;
+    bool isLast = false;
+    String buttonTitle = 'Next';
     return Scaffold(
       // backgroundColor: Colors.grey[300],
       appBar: AppBar(
         elevation: 0,
-        // backgroundColor: Colors.lightBlue[200],
-        title: const Text('Mentlo'),
+        backgroundColor: Colors.white,
+        title: const Text(
+          'Mentlo',
+          style: TextStyle(
+            color:Colors.black,
+          )
+        ),
         centerTitle: true,
         actions: [
           TextButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => const SignUpScreen()), (Route<dynamic> route) => false);
+              },
               child: const Text(
                 'Skip',
                 style: TextStyle(
-                  color: Colors.white,
+                  color: Colors.black,
                   fontSize: 18,
                 ),
               ))
@@ -115,13 +124,11 @@ class _OnBoardingWidgetState extends State<OnBoardingWidget> {
                 child: PageView.builder(
                   onPageChanged: (index) {
                     if (index == boarding.length - 1) {
-                      setState(() {
-                        isLast = 3;
-                      });
+                        isLast = true;
+                        buttonTitle = 'Get Started';
                     } else {
-                      setState(() {
-                        isLast = isLast++;
-                      });
+
+                        isLast = false;
                     }
                   },
                   controller: scrollController,
@@ -143,8 +150,9 @@ class _OnBoardingWidgetState extends State<OnBoardingWidget> {
                   ),
                   child: MaterialButton(
                     onPressed: () {
-                      if (isLast == 3 ) {
-                        debugPrint(isLast.toString());
+                      if (isLast == true){
+                        debugPrint('last');
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => const SignUpScreen(),),);
                       } else {
                         scrollController.nextPage(
                           duration: const Duration(milliseconds: 750),
@@ -153,9 +161,9 @@ class _OnBoardingWidgetState extends State<OnBoardingWidget> {
                       }
                     },
                     height: 54,
-                    child: const Text(
-                      'Next',
-                      style: TextStyle(
+                    child: Text(
+                      buttonTitle.toString(),
+                      style: const TextStyle(
                         fontSize: 18.0,
                         fontWeight: FontWeight.bold,
                         color: Colors.white,
