@@ -4,6 +4,7 @@ class DefaultFormField extends StatelessWidget {
   final TextEditingController? controller;
   final TextInputType keyboardType;
   final String validate;
+  // final Function? validate;
   final IconData? suffix;
   final String? hintText;
   final bool isPassword;
@@ -23,7 +24,7 @@ class DefaultFormField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-      validator: (String? value) {
+      validator: (value) {
         if (value!.isEmpty) {
           return validate;
         }
