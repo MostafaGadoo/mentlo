@@ -2,6 +2,11 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mentlo/core/utils/authentication_bloc/cubit.dart';
+import 'package:mentlo/core/utils/blocs/doctors_bloc/cubit.dart';
+import 'package:mentlo/core/utils/blocs/navigation_bloc/cubit.dart';
+import 'package:mentlo/features/doctors_list/page/doctors_list_screen.dart';
+import 'package:mentlo/features/home_page/page/home_page_screen.dart';
+import 'package:mentlo/features/layouts/main_layout.dart';
 import 'package:mentlo/features/onboarding/widgets/onboarding_widget.dart';
 import 'package:mentlo/features/sign_in/page/signin_page.dart';
 import 'package:mentlo/features/sign_up/page/sigin_up_screen.dart';
@@ -21,6 +26,8 @@ class MyApp extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(create: (context) => AuthenticationBloc()),
+        BlocProvider(create: (context) => NavigationBloc()),
+        BlocProvider(create: (context) => DoctorsBloc()..getDoctors()),
       ],
       child: MaterialApp(
         title: 'Flutter Demo',

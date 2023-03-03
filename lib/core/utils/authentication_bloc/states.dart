@@ -11,6 +11,13 @@ class SignUpErrorState extends AuthenticationState{
   SignUpErrorState(this.error);
 }
 
+class SignUpCreateUserSuccessState extends AuthenticationState{}
+
+class SignUpCreateUserErrorState extends AuthenticationState{
+  final String error;
+  SignUpCreateUserErrorState(this.error);
+}
+
 class SignInInitialState extends AuthenticationState{}
 
 class SignInLoadingState extends AuthenticationState{}
