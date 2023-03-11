@@ -11,3 +11,11 @@ class AppointmentErrorState extends AppointmentStates {
 
   AppointmentErrorState(this.error);
 }
+
+class AppointmentSaveSuccessState extends AppointmentStates {}
+
+class AppointmentSaveErrorState extends AppointmentStates {
+  final String error;
+
+  AppointmentSaveErrorState(this.error);
+}

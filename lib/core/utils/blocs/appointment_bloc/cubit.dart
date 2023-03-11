@@ -24,4 +24,33 @@ class AppointmentBloc extends Cubit<AppointmentStates> {
       emit(AppointmentErrorState(error.toString()));
     });
   }
+
+  void bookAppointment({
+    required String date,
+    required String time,
+    required String userId,
+    required String doctorId,
+    required String appointmentId,
+  }){
+    AppointmentModel appointmentModel = AppointmentModel(
+      date: date,
+      time: time,
+      userId: userId,
+      doctorId: doctorId,
+      appointmentId: appointmentId,
+    );
+    FirebaseFirestore.instance
+        .collection('appointments')
+        .doc(appointmentId)
+        .set(appointmentModel.toJson())
+        .then((value){
+      emit(AppointmentSaveSuccessState());
+      debugPrint('Appointment Booked');
+    }).catchError((error){
+      emit(AppointmentSaveErrorState(error.toString()));
+      debugPrint('Appointment Error');
+    });
+  }
+
+
 }

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:mentlo/core/utils/blocs/doctors_bloc/cubit.dart';
 import 'package:mentlo/core/utils/shared_widgets/topDoctorsWidget.dart';
+import 'package:mentlo/features/dentistry/pages/dentistry_home_screen.dart';
 import 'package:mentlo/features/doctors_list/page/doctors_list_screen.dart';
 
 class HomePageWidget extends StatelessWidget {
@@ -54,17 +55,22 @@ class HomePageWidget extends StatelessWidget {
                         ),
                       ),
                       Row(
-                        children: const [
+                        children: [
                           Expanded(
-                            child: CircleAvatar(
-                              radius: 40,
-                              backgroundColor: Colors.white,
-                              backgroundImage: AssetImage(
-                                'assets/icons/teeth.png',
+                            child: GestureDetector(
+                              onTap: (){
+                                Navigator.push(context, MaterialPageRoute(builder: (context) => const DentistryHomeScreen(),),);
+                              },
+                              child: const CircleAvatar(
+                                radius: 40,
+                                backgroundColor: Colors.white,
+                                backgroundImage: AssetImage(
+                                  'assets/icons/teeth.png',
+                                ),
                               ),
                             ),
                           ),
-                          Expanded(
+                          const Expanded(
                             child: CircleAvatar(
                               radius: 40,
                               backgroundColor: Colors.white,
@@ -73,7 +79,7 @@ class HomePageWidget extends StatelessWidget {
                               ),
                             ),
                           ),
-                          Expanded(
+                          const Expanded(
                             child: CircleAvatar(
                               radius: 40,
                               backgroundColor: Colors.white,
@@ -82,7 +88,7 @@ class HomePageWidget extends StatelessWidget {
                               ),
                             ),
                           ),
-                          Expanded(
+                          const Expanded(
                             child: CircleAvatar(
                               radius: 40,
                               backgroundColor: Colors.white,
@@ -174,7 +180,7 @@ class HomePageWidget extends StatelessWidget {
                             separatorBuilder: (context, builder) => const SizedBox(
                               height: 15,
                             ),
-                            itemCount: DoctorsBloc.get(context).doctors.length
+                            itemCount: DoctorsBloc.get(context).doctors.length,
                         ),
                       ),
                     ],

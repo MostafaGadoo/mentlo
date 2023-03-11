@@ -2,6 +2,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mentlo/core/utils/authentication_bloc/cubit.dart';
+import 'package:mentlo/core/utils/blocs/appointment_bloc/cubit.dart';
 import 'package:mentlo/core/utils/blocs/doctors_bloc/cubit.dart';
 import 'package:mentlo/core/utils/blocs/navigation_bloc/cubit.dart';
 import 'package:mentlo/features/doctors_list/page/doctors_list_screen.dart';
@@ -27,7 +28,8 @@ class MyApp extends StatelessWidget {
       providers: [
         BlocProvider(create: (context) => AuthenticationBloc()),
         BlocProvider(create: (context) => NavigationBloc()),
-        BlocProvider(create: (context) => DoctorsBloc()..getDoctors()),
+        BlocProvider(create: (context) => DoctorsBloc()..getDoctors()..getDoctorsByCategory('Dentistry')),
+        BlocProvider(create: (context) => AppointmentBloc()),
       ],
       child: MaterialApp(
         title: 'Flutter Demo',

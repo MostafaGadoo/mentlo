@@ -68,7 +68,7 @@ class DoctorsListWidget extends StatelessWidget {
                               ),
                               const SizedBox(height: 8),
                               Text(
-                                cubit.doctors[2].specialization,
+                                cubit.doctors[0].specialization,
                                 style: const TextStyle(
                                   color: Colors.black,
                                   fontSize: 16,
@@ -84,7 +84,7 @@ class DoctorsListWidget extends StatelessWidget {
                                 ),
                                 child: MaterialButton(
                                   onPressed: () {
-                                    debugPrint(cubit.doctors[0].description);
+                                    debugPrint(cubit.doctors[0].specialization);
                                   },
                                   child: const Text(
                                     'Appointment',
@@ -116,11 +116,11 @@ class DoctorsListWidget extends StatelessWidget {
                               CircleAvatar(
                                 radius: 45,
                                 backgroundColor: Colors.blue,
-                                backgroundImage: NetworkImage(cubit.doctors[1].imageUrl),
+                                backgroundImage: NetworkImage(cubit.doctors[0].imageUrl),
                               ),
                               const SizedBox(height: 25),
                               Text(
-                                cubit.doctors[1].name.split('J.').first,
+                                cubit.doctors[0].name.split('J.').first,
                                 style: const TextStyle(
                                   color: Colors.black,
                                   fontSize: 18,
@@ -129,7 +129,7 @@ class DoctorsListWidget extends StatelessWidget {
                               ),
                               const SizedBox(height: 8),
                               Text(
-                                cubit.doctors[1].specialization,
+                                cubit.doctors[0].specialization,
                                 style: const TextStyle(
                                   color: Colors.black,
                                   fontSize: 16,
