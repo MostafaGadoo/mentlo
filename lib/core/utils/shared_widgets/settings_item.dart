@@ -13,26 +13,31 @@ class SettingsItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () {
-        onTap!();
-      },
-      child: Row(
-        children: [
-          Expanded(
-            child: Text(
-                text,
-                style: const TextStyle(
-                  color: Colors.black,
-                  fontSize: 28,
-                  fontWeight: FontWeight.bold,
-                )),
-          ),
-          Icon(
-            icon,
-            size: 36,
-          ),
-        ],
+    return Padding(
+      padding: const EdgeInsets.symmetric(
+        vertical: 4,
+      ),
+      child: GestureDetector(
+        onTap: () {
+          onTap!();
+        },
+        child: Row(
+          children: [
+            Expanded(
+              child: Text(
+                  text,
+                  style: const TextStyle(
+                    color: Colors.black,
+                    fontSize: 28,
+                    fontWeight: FontWeight.bold,
+                  )),
+            ),
+            Icon(
+              icon,
+              size: 36,
+            ),
+          ],
+        ),
       ),
     );
   }

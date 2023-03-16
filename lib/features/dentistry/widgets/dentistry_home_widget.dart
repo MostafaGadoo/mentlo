@@ -19,6 +19,7 @@ class DentistryHomeWidget extends StatelessWidget {
         AppointmentBloc appointmentCubit = AppointmentBloc.get(context);
         TextEditingController dateController = TextEditingController();
         TextEditingController timeController = TextEditingController();
+        bool isBottomSheetShown = false;
         return Scaffold(
           appBar: AppBar(
             title: const Text(
@@ -52,7 +53,7 @@ class DentistryHomeWidget extends StatelessWidget {
                               radius: 38,
                               // backgroundColor: Colors.blue,
                               backgroundImage:
-                                  NetworkImage(cubit.doctors[0].imageUrl),
+                                  NetworkImage(cubit.doctors[index].imageUrl),
                             ),
                           ),
                           Expanded(
@@ -64,12 +65,12 @@ class DentistryHomeWidget extends StatelessWidget {
                                     vertical: 8,
                                   ),
                                   child: Text(
-                                    cubit.doctorsSpecialization[0].name,
+                                    cubit.doctorsSpecialization[index].name,
                                     style: const TextStyle(fontSize: 18),
                                   ),
                                 ),
                                 Text(
-                                  cubit.doctorsSpecialization[0].email,
+                                  cubit.doctorsSpecialization[index].email,
                                   style: const TextStyle(fontSize: 16),
                                   overflow: TextOverflow.ellipsis,
                                 ),
@@ -86,7 +87,7 @@ class DentistryHomeWidget extends StatelessWidget {
                                       ),
                                     ),
                                     Text(
-                                      cubit.doctorsSpecialization[0].from,
+                                      cubit.doctorsSpecialization[index].from,
                                       style: const TextStyle(fontSize: 16),
                                       overflow: TextOverflow.ellipsis,
                                     ),
@@ -97,7 +98,7 @@ class DentistryHomeWidget extends StatelessWidget {
                                       ),
                                     ),
                                     Text(
-                                      cubit.doctorsSpecialization[0].to,
+                                      cubit.doctorsSpecialization[index].to,
                                       style: const TextStyle(fontSize: 16),
                                       overflow: TextOverflow.ellipsis,
                                     ),
@@ -116,6 +117,7 @@ class DentistryHomeWidget extends StatelessWidget {
                               ),
                               child: TextButton(
                                   onPressed: () {
+                                    isBottomSheetShown = true;
                                     showBottomSheet(
                                         context: context,
                                         builder: (context) => Container(
@@ -265,8 +267,13 @@ class DentistryHomeWidget extends StatelessWidget {
                                                           ),
                                                           child: TextButton(
                                                             onPressed: () {
-                                                              appointmentCubit.bookAppointment(date: dateController.text, time: timeController.text, userId: 'FzwWU95tRvRaQTHBjGvbyGrnGAA3', doctorId: 'EOuOGvrebNtIXqDOElzL', appointmentId: '2');
+
+                                                              appointmentCubit.bookAppointment(date: dateController.text, time: timeController.text, userId: 'FzwWU95tRvRaQTHBjGvbyGrnGAA3', doctorId: 'EOuOGvrebNtIXqDOElzL');
                                                               debugPrint('done');
+                                                              isBottomSheetShown = false;
+                                                              dateController.clear();
+                                                              timeController.clear();
+                                                              Navigator.pop(context);
                                                             },
                                                             child: const Text(
                                                               'Book',

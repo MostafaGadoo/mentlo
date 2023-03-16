@@ -3,7 +3,7 @@ class AppointmentModel {
   final String time;
   final String userId;
   final String doctorId;
-  final String appointmentId;
+  final int appointmentId;
 
   AppointmentModel({
     required this.date,

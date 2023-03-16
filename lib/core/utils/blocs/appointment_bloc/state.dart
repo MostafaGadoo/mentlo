@@ -19,3 +19,7 @@ class AppointmentSaveErrorState extends AppointmentStates {
 
   AppointmentSaveErrorState(this.error);
 }
+
+class AppointmentDaySelectionState extends AppointmentStates {}
+
+class AppointmentCalendarFormatState extends AppointmentStates {}

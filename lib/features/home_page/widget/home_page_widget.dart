@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
+import 'package:mentlo/core/utils/blocs/appointment_bloc/cubit.dart';
 import 'package:mentlo/core/utils/blocs/doctors_bloc/cubit.dart';
 import 'package:mentlo/core/utils/shared_widgets/topDoctorsWidget.dart';
 import 'package:mentlo/features/dentistry/pages/dentistry_home_screen.dart';
@@ -11,7 +12,7 @@ class HomePageWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // backgroundColor: HexColor('#DCFCFB'),
+      backgroundColor: HexColor('#f0f4f7'),
       appBar: AppBar(
         // backgroundColor: HexColor('#DCFCFB'),
         title: const Text(
@@ -30,10 +31,113 @@ class HomePageWidget extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+
+              Row(
+                children: [
+                  Expanded(
+                    child: Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                        color: Colors.white,
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.all(20.0),
+                        child: Column(
+                          children: const [
+                            CircleAvatar(
+                              radius: 38,
+                              // backgroundColor: Colors.white,
+                              backgroundImage: AssetImage('assets/images/doctor_visit.jpg'),
+                            ),
+                            SizedBox(
+                              height: 10,
+                            ),
+                            Text(
+                              'Clinic visit',
+                              style: TextStyle(
+                                fontSize: 14,
+                              ),
+                              ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(
+                    width: 10,
+                  ),
+                  Expanded(
+                    child: Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                        color: Colors.white,
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.all(20.0),
+                        child: Column(
+                          children: const [
+                            CircleAvatar(
+                              radius: 38,
+                              backgroundColor: Colors.blue,
+                              backgroundImage: AssetImage('assets/images/doctor_chat.jpg'),
+                            ),
+                            SizedBox(
+                              height: 10,
+                            ),
+                            Text(
+                              'Doctor Chat',
+                              textAlign: TextAlign.left,
+                              maxLines: 1,
+                              style: TextStyle(
+                                fontSize: 14,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(
+                    width: 10,
+                  ),
+                  Expanded(
+                    child: Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                        color: Colors.white,
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.all(20.0),
+                        child: Column(
+                          children: const [
+                            CircleAvatar(
+                              radius: 38,
+                              backgroundColor: Colors.blue,
+                              backgroundImage: AssetImage('assets/images/mental_help.jpg'),
+                            ),
+                            SizedBox(
+                              height: 10,
+                            ),
+                            Text(
+                              'Mental Help',
+                              style: TextStyle(
+                                fontSize: 14,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(
+                height: 12,
+              ),
               Container(
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10),
-                  color: HexColor('#F3F3F4'),
+                  color: Colors.white,
                 ),
                 child: Padding(
                   padding: const EdgeInsets.all(16.0),
@@ -70,12 +174,17 @@ class HomePageWidget extends StatelessWidget {
                               ),
                             ),
                           ),
-                          const Expanded(
-                            child: CircleAvatar(
-                              radius: 40,
-                              backgroundColor: Colors.white,
-                              backgroundImage: AssetImage(
-                                'assets/icons/heart.png',
+                          Expanded(
+                            child: GestureDetector(
+                              onTap: (){
+                                debugPrint(DoctorsBloc.get(context).doctors[1].name);
+                              },
+                              child: const CircleAvatar(
+                                radius: 40,
+                                backgroundColor: Colors.white,
+                                backgroundImage: AssetImage(
+                                  'assets/icons/heart.png',
+                                ),
                               ),
                             ),
                           ),
