@@ -32,6 +32,7 @@ class MainLayOut extends StatelessWidget {
               },
               currentIndex: cubit.currentIndex,
               type: BottomNavigationBarType.fixed,
+              selectedItemColor: Colors.teal,
               items: const [
                 BottomNavigationBarItem(
                   icon: Icon(Icons.home),

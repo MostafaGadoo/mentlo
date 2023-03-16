@@ -11,3 +11,13 @@ class DoctorsErrorState extends DoctorsStates {
 
   DoctorsErrorState(this.error);
 }
+
+class DoctorsBySpecializationLoadingState extends DoctorsStates {}
+
+class DoctorsBySpecializationSuccessState extends DoctorsStates {}
+
+class DoctorsBySpecializationErrorState extends DoctorsStates {
+  final String error;
+
+  DoctorsBySpecializationErrorState(this.error);
+}
