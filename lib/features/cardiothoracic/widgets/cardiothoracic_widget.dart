@@ -8,8 +8,8 @@ import 'package:mentlo/core/utils/constants/contstants.dart';
 import 'package:mentlo/core/utils/shared_widgets/components.dart';
 import 'package:mentlo/core/utils/shared_widgets/default_doctor_list_item.dart';
 
-class DentistryHomeWidget extends StatelessWidget {
-  const DentistryHomeWidget({Key? key}) : super(key: key);
+class CardiothoracicWidget extends StatelessWidget {
+  const CardiothoracicWidget({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -25,25 +25,16 @@ class DentistryHomeWidget extends StatelessWidget {
         bool isBottomSheetShown = false;
         var scaffoldKey = GlobalKey<ScaffoldState>();
         return Scaffold(
-          // appBar: AppBar(
-          //   title: const Text(
-          //     'Dentistry Doctors',
-          //     style: TextStyle(
-          //       color: Colors.black,
-          //     ),
-          //   ),
-          //   centerTitle: true,
-          // ),
           key: scaffoldKey,
           body: ListView.separated(
               physics: const BouncingScrollPhysics(),
               itemBuilder: (context, index) => DefaultDoctorsListItem(
-                    profileImage: cubit.dentistList[index].imageURL,
-                    doctorName: cubit.dentistList[index].name,
-                    doctorEmail: cubit.dentistList[index].email,
-                    from: cubit.dentistList[index].from,
-                    to: cubit.dentistList[index].to,
-                    workingDays: cubit.dentistList[index].workingDays,
+                    profileImage: cubit.cardiothoracicList[index].imageURL,
+                    doctorName: cubit.cardiothoracicList[index].name,
+                    doctorEmail: cubit.cardiothoracicList[index].email,
+                    from: cubit.cardiothoracicList[index].from,
+                    to: cubit.cardiothoracicList[index].to,
+                    workingDays: cubit.cardiothoracicList[index].workingDays,
                     appointmentBooked: () {
                       debugPrint('Appointment Booked');
                       isBottomSheetShown = true;
@@ -161,27 +152,36 @@ class DentistryHomeWidget extends StatelessWidget {
                                       ),
                                       child: MaterialButton(
                                         onPressed: () {
-                                              if(dateController.text.isNotEmpty && timeController.text.isNotEmpty){
-                                                appointmentCubit.bookAppointment(
-                                                    date: dateController.text,
-                                                    time: timeController.text,
-                                                    userId: '1',
-                                                    doctorId: cubit.dentistList[index].doctorId);
-                                                Navigator.pop(context);
-                                                isBottomSheetShown = false;
-                                                dateController.clear();
-                                                timeController.clear();
-                                                showToast(msg: 'Appointment Booked', state: ToastState.SUCCESS);
-                                              }else{
-                                                showToast(msg: 'Please enter the appointment data', state: ToastState.ERROR);
-                                              }
+                                          if (dateController.text.isNotEmpty &&
+                                              timeController.text.isNotEmpty) {
+                                            appointmentCubit.bookAppointment(
+                                                date: dateController.text,
+                                                time: timeController.text,
+                                                userId: '1',
+                                                doctorId: cubit
+                                                    .dentistList[index]
+                                                    .doctorId);
+                                            Navigator.pop(context);
+                                            isBottomSheetShown = false;
+                                            dateController.clear();
+                                            timeController.clear();
+                                            showToast(
+                                                msg: 'Appointment Booked',
+                                                state: ToastState.SUCCESS);
+                                          } else {
+                                            showToast(
+                                                msg:
+                                                    'Please enter the appointment data',
+                                                state: ToastState.ERROR);
+                                          }
                                         },
                                         child: const Text(
                                           'Book',
-                                        style: TextStyle(
-                                          color: Colors.white,
-                                          fontSize: 20,
-                                        ),),
+                                          style: TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 20,
+                                          ),
+                                        ),
                                       ),
                                     ),
                                   ],
@@ -196,7 +196,7 @@ class DentistryHomeWidget extends StatelessWidget {
               separatorBuilder: (context, index) => const SizedBox(
                     height: 8,
                   ),
-              itemCount: cubit.dentistList.length),
+              itemCount: cubit.cardiothoracicList.length),
         );
       },
     );

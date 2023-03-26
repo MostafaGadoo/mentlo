@@ -29,7 +29,7 @@ class MyApp extends StatelessWidget {
       providers: [
         BlocProvider(create: (context) => AuthenticationBloc()),
         BlocProvider(create: (context) => NavigationBloc()),
-        BlocProvider(create: (context) => DoctorsBloc()..getDoctors()..getDoctorsByCategory('Dentistry')),
+        BlocProvider(create: (context) => DoctorsBloc()..getDoctors()..getDentists()..getCardiothoracic()..getSurgery()),
         BlocProvider(create: (context) => AppointmentBloc()),
       ],
       child: MaterialApp(

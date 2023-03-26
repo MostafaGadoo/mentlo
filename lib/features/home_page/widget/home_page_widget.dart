@@ -35,30 +35,35 @@ class HomePageWidget extends StatelessWidget {
               Row(
                 children: [
                   Expanded(
-                    child: Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        color: Colors.white,
-                      ),
-                      child: Padding(
-                        padding: const EdgeInsets.all(20.0),
-                        child: Column(
-                          children: const [
-                            CircleAvatar(
-                              radius: 38,
-                              // backgroundColor: Colors.white,
-                              backgroundImage: AssetImage('assets/images/doctor_visit.jpg'),
-                            ),
-                            SizedBox(
-                              height: 10,
-                            ),
-                            Text(
-                              'Clinic visit',
-                              style: TextStyle(
-                                fontSize: 14,
+                    child: GestureDetector(
+                      onTap: (){
+                        debugPrint(DoctorsBloc.get(context).doctors[0].name);
+                      },
+                      child: Container(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                          color: Colors.white,
+                        ),
+                        child: Padding(
+                          padding: const EdgeInsets.all(20.0),
+                          child: Column(
+                            children: const [
+                              CircleAvatar(
+                                radius: 38,
+                                // backgroundColor: Colors.white,
+                                backgroundImage: AssetImage('assets/images/doctor_visit.jpg'),
                               ),
+                              SizedBox(
+                                height: 10,
                               ),
-                          ],
+                              Text(
+                                'Clinic visit',
+                                style: TextStyle(
+                                  fontSize: 14,
+                                ),
+                                ),
+                            ],
+                          ),
                         ),
                       ),
                     ),

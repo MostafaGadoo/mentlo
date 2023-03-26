@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:hexcolor/hexcolor.dart';
 import 'package:mentlo/core/utils/blocs/appointment_bloc/cubit.dart';
 import 'package:mentlo/core/utils/blocs/doctors_bloc/cubit.dart';
 import 'package:mentlo/core/utils/blocs/doctors_bloc/states.dart';
@@ -8,8 +7,8 @@ import 'package:mentlo/core/utils/constants/contstants.dart';
 import 'package:mentlo/core/utils/shared_widgets/components.dart';
 import 'package:mentlo/core/utils/shared_widgets/default_doctor_list_item.dart';
 
-class DentistryHomeWidget extends StatelessWidget {
-  const DentistryHomeWidget({Key? key}) : super(key: key);
+class SurgeryWidget extends StatelessWidget {
+  const SurgeryWidget({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -25,25 +24,16 @@ class DentistryHomeWidget extends StatelessWidget {
         bool isBottomSheetShown = false;
         var scaffoldKey = GlobalKey<ScaffoldState>();
         return Scaffold(
-          // appBar: AppBar(
-          //   title: const Text(
-          //     'Dentistry Doctors',
-          //     style: TextStyle(
-          //       color: Colors.black,
-          //     ),
-          //   ),
-          //   centerTitle: true,
-          // ),
           key: scaffoldKey,
           body: ListView.separated(
               physics: const BouncingScrollPhysics(),
               itemBuilder: (context, index) => DefaultDoctorsListItem(
-                    profileImage: cubit.dentistList[index].imageURL,
-                    doctorName: cubit.dentistList[index].name,
-                    doctorEmail: cubit.dentistList[index].email,
-                    from: cubit.dentistList[index].from,
-                    to: cubit.dentistList[index].to,
-                    workingDays: cubit.dentistList[index].workingDays,
+                    profileImage: cubit.surgeryList[index].imageURL,
+                    doctorName: cubit.surgeryList[index].name,
+                    doctorEmail: cubit.surgeryList[index].email,
+                    from: cubit.surgeryList[index].from,
+                    to: cubit.surgeryList[index].to,
+                    workingDays: cubit.surgeryList[index].workingDays,
                     appointmentBooked: () {
                       debugPrint('Appointment Booked');
                       isBottomSheetShown = true;
@@ -161,27 +151,36 @@ class DentistryHomeWidget extends StatelessWidget {
                                       ),
                                       child: MaterialButton(
                                         onPressed: () {
-                                              if(dateController.text.isNotEmpty && timeController.text.isNotEmpty){
-                                                appointmentCubit.bookAppointment(
-                                                    date: dateController.text,
-                                                    time: timeController.text,
-                                                    userId: '1',
-                                                    doctorId: cubit.dentistList[index].doctorId);
-                                                Navigator.pop(context);
-                                                isBottomSheetShown = false;
-                                                dateController.clear();
-                                                timeController.clear();
-                                                showToast(msg: 'Appointment Booked', state: ToastState.SUCCESS);
-                                              }else{
-                                                showToast(msg: 'Please enter the appointment data', state: ToastState.ERROR);
-                                              }
+                                          if (dateController.text.isNotEmpty &&
+                                              timeController.text.isNotEmpty) {
+                                            appointmentCubit.bookAppointment(
+                                                date: dateController.text,
+                                                time: timeController.text,
+                                                userId: '1',
+                                                doctorId: cubit
+                                                    .dentistList[index]
+                                                    .doctorId);
+                                            Navigator.pop(context);
+                                            isBottomSheetShown = false;
+                                            dateController.clear();
+                                            timeController.clear();
+                                            showToast(
+                                                msg: 'Appointment Booked',
+                                                state: ToastState.SUCCESS);
+                                          } else {
+                                            showToast(
+                                                msg:
+                                                    'Please enter the appointment data',
+                                                state: ToastState.ERROR);
+                                          }
                                         },
                                         child: const Text(
                                           'Book',
-                                        style: TextStyle(
-                                          color: Colors.white,
-                                          fontSize: 20,
-                                        ),),
+                                          style: TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 20,
+                                          ),
+                                        ),
                                       ),
                                     ),
                                   ],
@@ -196,7 +195,7 @@ class DentistryHomeWidget extends StatelessWidget {
               separatorBuilder: (context, index) => const SizedBox(
                     height: 8,
                   ),
-              itemCount: cubit.dentistList.length),
+              itemCount: cubit.surgeryList.length),
         );
       },
     );

@@ -21,3 +21,31 @@ class DoctorsBySpecializationErrorState extends DoctorsStates {
 
   DoctorsBySpecializationErrorState(this.error);
 }
+
+class DentistGetLoadingState extends DoctorsStates {}
+
+class DentistGetSuccessState extends DoctorsStates {}
+
+class DentistGetErrorState extends DoctorsStates {
+  final String error;
+  DentistGetErrorState(this.error);
+}
+
+class CardiothoracicGetLoadingState extends DoctorsStates {}
+
+class CardiothoracicGetSuccessState extends DoctorsStates {}
+
+class CardiothoracicGetErrorState extends DoctorsStates {
+  final String error;
+  CardiothoracicGetErrorState(this.error);
+}
+
+class SurgeryGetLoadingState extends DoctorsStates {}
+
+class SurgeryGetSuccessState extends DoctorsStates {}
+
+class SurgeryGetErrorState extends DoctorsStates {
+  final String error;
+  SurgeryGetErrorState(this.error);
+}
+
