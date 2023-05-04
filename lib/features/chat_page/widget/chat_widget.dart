@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mentlo/core/utils/shared_widgets/ChatWidget.dart';
+import 'package:mentlo/core/utils/styles/colors.dart';
 
 class ChatWidget extends StatelessWidget {
   const ChatWidget({Key? key}) : super(key: key);
@@ -45,7 +46,7 @@ class ChatWidget extends StatelessWidget {
         onPressed: () {
           debugPrint('Pressed');
         },
-        backgroundColor: Colors.teal,
+        backgroundColor: defaultColor,
         child: const Icon(
           Icons.message_outlined,
           color: Colors.white,

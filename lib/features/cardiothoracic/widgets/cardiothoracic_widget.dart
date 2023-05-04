@@ -1,3 +1,4 @@
+import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hexcolor/hexcolor.dart';
@@ -24,11 +25,13 @@ class CardiothoracicWidget extends StatelessWidget {
         TextEditingController timeController = TextEditingController();
         bool isBottomSheetShown = false;
         var scaffoldKey = GlobalKey<ScaffoldState>();
-        return Scaffold(
-          key: scaffoldKey,
-          body: ListView.separated(
-              physics: const BouncingScrollPhysics(),
-              itemBuilder: (context, index) => DefaultDoctorsListItem(
+        return ConditionalBuilder(
+            condition: state is! GetCardiothoracicLoadingState,
+            builder: (context) => Scaffold(
+              key: scaffoldKey,
+              body: ListView.separated(
+                  physics: const BouncingScrollPhysics(),
+                  itemBuilder: (context, index) => DefaultDoctorsListItem(
                     profileImage: cubit.cardiothoracicList[index].imageURL,
                     doctorName: cubit.cardiothoracicList[index].name,
                     doctorEmail: cubit.cardiothoracicList[index].email,
@@ -39,7 +42,7 @@ class CardiothoracicWidget extends StatelessWidget {
                       debugPrint('Appointment Booked');
                       isBottomSheetShown = true;
                       scaffoldKey.currentState!.showBottomSheet(
-                        (context) => Container(
+                            (context) => Container(
                           height: 300,
                           width: double.infinity,
                           color: Colors.white,
@@ -86,7 +89,7 @@ class CardiothoracicWidget extends StatelessWidget {
                                   ),
                                   onTap: () async {
                                     final TimeOfDay? picked =
-                                        await showTimePicker(
+                                    await showTimePicker(
                                       context: context,
                                       initialTime: TimeOfDay.now(),
                                     );
@@ -125,7 +128,7 @@ class CardiothoracicWidget extends StatelessWidget {
                                   ),
                                   onTap: () async {
                                     final DateTime? picked =
-                                        await showDatePicker(
+                                    await showDatePicker(
                                       context: context,
                                       initialDate: DateTime.now(),
                                       firstDate: DateTime(2020, 8),
@@ -171,7 +174,7 @@ class CardiothoracicWidget extends StatelessWidget {
                                           } else {
                                             showToast(
                                                 msg:
-                                                    'Please enter the appointment data',
+                                                'Please enter the appointment data',
                                                 state: ToastState.ERROR);
                                           }
                                         },
@@ -193,10 +196,26 @@ class CardiothoracicWidget extends StatelessWidget {
                       );
                     },
                   ),
-              separatorBuilder: (context, index) => const SizedBox(
+                  separatorBuilder: (context, index) => const SizedBox(
                     height: 8,
                   ),
-              itemCount: cubit.cardiothoracicList.length),
+                  itemCount: cubit.cardiothoracicList.length),
+            ),
+            fallback: (context) =>  Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: const [
+                    CircularProgressIndicator(
+                      color: Colors.teal,
+                    ),
+                    SizedBox(
+                      height: 16,
+                    ),
+                    Text(
+                      'Loading...',
+                    ),
+                  ],
+                )),
         );
       },
     );

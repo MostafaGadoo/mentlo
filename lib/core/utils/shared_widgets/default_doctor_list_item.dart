@@ -68,27 +68,29 @@ class DefaultDoctorsListItem extends StatelessWidget {
                             Row(
                               // mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                Container(
-                                    height: 54,
-                                    clipBehavior: Clip.antiAlias,
-                                    decoration: BoxDecoration(
-                                      color: Colors.teal,
-                                      borderRadius: BorderRadius.circular(10),
-                                    ),
-                                    child: MaterialButton(
-                                      onPressed: (){
-                                        Navigator.pop(context);
-                                        appointmentBooked!();
-                                      },
-                                      child: const Text(
-                                        'Book Appointment',
-                                        style: TextStyle(
-                                          color: Colors.white,
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.w500,
-                                        ),
+                                Expanded(
+                                  child: Container(
+                                      height: 54,
+                                      clipBehavior: Clip.antiAlias,
+                                      decoration: BoxDecoration(
+                                        color: Colors.teal,
+                                        borderRadius: BorderRadius.circular(10),
                                       ),
-                                    )),
+                                      child: MaterialButton(
+                                        onPressed: (){
+                                          Navigator.pop(context);
+                                          appointmentBooked!();
+                                        },
+                                        child: const Text(
+                                          'Book Appointment',
+                                          style: TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 16,
+                                            fontWeight: FontWeight.w500,
+                                          ),
+                                        ),
+                                      )),
+                                ),
                                 const SizedBox(
                                   width: 34,
                                 ),

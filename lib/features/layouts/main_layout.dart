@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mentlo/core/utils/blocs/navigation_bloc/cubit.dart';
 import 'package:mentlo/core/utils/blocs/navigation_bloc/states.dart';
+import 'package:mentlo/core/utils/styles/colors.dart';
 
 class MainLayOut extends StatelessWidget {
   const MainLayOut({Key? key}) : super(key: key);
@@ -32,7 +33,7 @@ class MainLayOut extends StatelessWidget {
               },
               currentIndex: cubit.currentIndex,
               type: BottomNavigationBarType.fixed,
-              selectedItemColor: Colors.teal,
+              selectedItemColor: defaultColor,
               items: const [
                 BottomNavigationBarItem(
                   icon: Icon(Icons.home),

@@ -33,7 +33,9 @@ class DefaultFormField extends StatelessWidget {
       controller: controller,
       obscureText: isPassword,
       decoration: InputDecoration(
-        hintText: hintText,
+        label: Text(
+          hintText!,
+        ),
         border: const OutlineInputBorder(
           borderRadius: BorderRadius.only(
             bottomRight: Radius.circular(18),

@@ -109,6 +109,8 @@ class SignUpWidget extends StatelessWidget {
                       validator: (value) {
                         if (value!.isEmpty) {
                           return 'Please enter your email';
+                        }else if(!value.contains('@')){
+                          return 'Please enter a valid email';
                         }
                         return null;
                       },
@@ -141,6 +143,8 @@ class SignUpWidget extends StatelessWidget {
                       validator: (value) {
                         if (value!.isEmpty) {
                           return 'Please enter your password';
+                        }else if(value.length < 8){
+                            return 'Password must be at least 8 characters';
                         }
                         return null;
                       },
@@ -178,6 +182,8 @@ class SignUpWidget extends StatelessWidget {
                       validator: (value) {
                         if (value!.isEmpty) {
                           return 'Please enter your confirmation password';
+                        }else if(value != passwordController.text){
+                          return 'Password does not match';
                         }
                         return null;
                       },
@@ -214,6 +220,8 @@ class SignUpWidget extends StatelessWidget {
                       validator: (value) {
                         if (value!.isEmpty) {
                           return 'Please enter your Phone number';
+                        }else if(value.length < 10){
+                          return 'Phone number must be at least 11 characters';
                         }
                         return null;
                       },
@@ -329,13 +337,8 @@ class SignUpWidget extends StatelessWidget {
                       ),
                       child: MaterialButton(
                         onPressed: () {
-                          if (passwordController.text !=
-                              confirmPasswordController.text) {
-                            showToast(
-                                msg: 'Passwords does\'t match',
-                                state: ToastState.ERROR);
-                            debugPrint('error');
-                          } else {
+                          if(formKey.currentState!.validate()){
+                            debugPrint('Sign Up');
                             showToast(
                                 msg: 'Thank you for signing up',
                                 state: ToastState.SUCCESS);

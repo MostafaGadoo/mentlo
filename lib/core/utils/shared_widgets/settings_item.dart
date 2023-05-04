@@ -28,8 +28,8 @@ class SettingsItem extends StatelessWidget {
                   text,
                   style: const TextStyle(
                     color: Colors.black,
-                    fontSize: 28,
-                    fontWeight: FontWeight.bold,
+                    fontSize: 24,
+                    // fontWeight: FontWeight.bold,
                   )),
             ),
             Icon(
