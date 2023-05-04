@@ -11,6 +11,23 @@ class AuthenticationBloc extends Cubit<AuthenticationState>{
 
 
 
+  UserModel userModel = UserModel();
+
+  void getUserData(){
+    emit(GetUserLoadingState());
+    FirebaseFirestore.instance
+        .collection('users')
+        .doc(FirebaseAuth.instance.currentUser!.uid)
+        .get()
+        .then((value){
+      emit(GetUserSuccessState());
+      debugPrint(value.data().toString());
+      userModel = UserModel.fromJson(value.data()!);
+    }).catchError((error){
+      emit(GetUserErrorState(error.toString()));
+    });
+  }
+
   void userRegister({
     required String? name,
     required String? email,

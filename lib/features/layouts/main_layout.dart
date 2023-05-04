@@ -47,10 +47,10 @@ class MainLayOut extends StatelessWidget {
                   icon: Icon(Icons.calendar_month),
                   label: 'Appointments',
                 ),
-                BottomNavigationBarItem(
-                  icon: Icon(Icons.chat),
-                  label: 'Chat',
-                ),
+                // BottomNavigationBarItem(
+                //   icon: Icon(Icons.chat),
+                //   label: 'Chat',
+                // ),
                 BottomNavigationBarItem(
                   icon: Icon(Icons.settings),
                   label: 'Settings',

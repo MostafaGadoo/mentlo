@@ -28,7 +28,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider(create: (context) => AuthenticationBloc()),
+        BlocProvider(create: (context) => AuthenticationBloc()..getUserData()),
         BlocProvider(create: (context) => NavigationBloc()),
         BlocProvider(create: (context) => DoctorsBloc()..getDoctors()..getDentists()..getCardiothoracic()..getSurgery()),
         BlocProvider(create: (context) => AppointmentBloc()..getPatientAppointments()),
@@ -44,7 +44,7 @@ class MyApp extends StatelessWidget {
             elevation: 0,
           ),
         ),
-        home: const MainLayOut(),
+        home: const SignInScreen(),
       ),
     );
   }

@@ -30,3 +30,12 @@ class SignInErrorState extends AuthenticationState{
 }
 
 class ShowPasswordState extends AuthenticationState{}
+
+class GetUserLoadingState extends AuthenticationState{}
+
+class GetUserSuccessState extends AuthenticationState{}
+
+class GetUserErrorState extends AuthenticationState{
+  final String error;
+  GetUserErrorState(this.error);
+}
