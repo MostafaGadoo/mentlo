@@ -3,6 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mentlo/core/utils/blocs/appointment_bloc/cubit.dart';
 import 'package:mentlo/core/utils/blocs/appointment_bloc/cubit.dart';
 import 'package:mentlo/core/utils/blocs/appointment_bloc/state.dart';
+import 'package:mentlo/core/utils/constants/contstants.dart';
+import 'package:mentlo/core/utils/shared_widgets/components.dart';
 import 'package:mentlo/core/utils/shared_widgets/defaultTextFormField.dart';
 import 'package:mentlo/core/utils/styles/colors.dart';
 
@@ -259,6 +261,13 @@ class MedicineTimingWidget extends StatelessWidget {
                     medicineTo: medicineToController.text,
                     repetition: repetitions!,
                 );
+                if(state is SaveMedicineDataSuccessState){
+                  showToast(
+                    msg: 'Medicine added successfully',
+                    state: ToastState.SUCCESS,
+                  );
+                  Navigator.pop(context);
+                }
               },
               backgroundColor: defaultColor,
               clipBehavior: Clip.antiAlias,

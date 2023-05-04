@@ -173,7 +173,7 @@ class AppointmentBloc extends Cubit<AppointmentStates> {
     );
     emit(SaveMedicineDataLoadingState());
     FirebaseFirestore.instance
-        .collection('repetitions')
+        .collection('medicineTiming')
         .doc()
         .set(medicineModel.toJson())
         .then((value){

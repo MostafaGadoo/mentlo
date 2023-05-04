@@ -21,7 +21,7 @@ class NavigationBloc extends Cubit<NavigationStates>{
     const HomePageScreen(),
     const DoctorsListScreen(),
     const AppointmentsScreen(),
-    const ChatScreen(),
+    // const ChatScreen(),
     const SettingsScreen(),
   ];
 

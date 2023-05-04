@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_credit_card/flutter_credit_card.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
+import 'package:mentlo/core/utils/authentication_bloc/cubit.dart';
 import 'package:mentlo/core/utils/blocs/appointment_bloc/cubit.dart';
 import 'package:mentlo/core/utils/blocs/appointment_bloc/state.dart';
 import 'package:mentlo/core/utils/blocs/appointment_bloc/state.dart';
@@ -38,6 +39,7 @@ class SettingsWidget extends StatelessWidget {
         NavigationBloc cubit = NavigationBloc.get(context);
         double? ratingStars = 0.0;
         TextEditingController ratingController = TextEditingController();
+        AuthenticationBloc authCubit = AuthenticationBloc.get(context);
         return OverlaySupport.global(
           child: Scaffold(
             appBar: AppBar(
@@ -63,9 +65,9 @@ class SettingsWidget extends StatelessWidget {
                           backgroundImage: NetworkImage(
                               'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png'),
                         ),
-                        const Text(
-                          'Name',
-                          style: TextStyle(
+                        Text(
+                          '${authCubit.userModel.name}',
+                          style: const TextStyle(
                             fontSize: 32,
                             fontWeight: FontWeight.w600,
                           ),
@@ -73,9 +75,9 @@ class SettingsWidget extends StatelessWidget {
                         const SizedBox(
                           height: 8,
                         ),
-                        const Text(
-                          'email@gmail.com',
-                          style: TextStyle(
+                        Text(
+                          '${authCubit.userModel.email}',
+                          style: const TextStyle(
                             fontSize: 24,
                             fontWeight: FontWeight.normal,
                           ),
