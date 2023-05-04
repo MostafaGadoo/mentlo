@@ -3,8 +3,11 @@ import 'package:hexcolor/hexcolor.dart';
 import 'package:mentlo/core/utils/blocs/appointment_bloc/cubit.dart';
 import 'package:mentlo/core/utils/blocs/doctors_bloc/cubit.dart';
 import 'package:mentlo/core/utils/shared_widgets/topDoctorsWidget.dart';
+import 'package:mentlo/core/utils/styles/colors.dart';
+import 'package:mentlo/core/utils/styles/icon_broken.dart';
 import 'package:mentlo/features/dentistry/pages/dentistry_home_screen.dart';
 import 'package:mentlo/features/doctors_list/page/doctors_list_screen.dart';
+import 'package:mentlo/features/medicine_timing/page/medicine_timing_page.dart';
 
 class HomePageWidget extends StatelessWidget {
   const HomePageWidget({Key? key}) : super(key: key);
@@ -31,12 +34,104 @@ class HomePageWidget extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-
+              Container(
+                width: double.infinity,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10),
+                  color: Colors.white,
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const Text(
+                        'Medical blogs',
+                        style: TextStyle(
+                          fontSize: 22,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.black,
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 5,
+                      ),
+                      const Text(
+                        'View information about health and wellness',
+                        style: TextStyle(
+                          fontSize: 14,
+                          // fontWeight: FontWeight.bold,
+                          color: Colors.black,
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      Row(
+                        children: [
+                          Expanded(
+                            child: Container(
+                              width: 80,
+                              height: 80,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10),
+                                color: Colors.teal,
+                              ),
+                            ),
+                          ),
+                          const SizedBox(
+                            width: 10,
+                          ),
+                          Expanded(
+                            child: Container(
+                              width: 80,
+                              height: 80,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10),
+                                color: Colors.teal,
+                              ),
+                            ),
+                          ),
+                          const SizedBox(
+                            width: 10,
+                          ),
+                          Expanded(
+                            child: Container(
+                              width: 80,
+                              height: 80,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10),
+                                color: Colors.teal,
+                              ),
+                            ),
+                          ),
+                          const SizedBox(
+                            width: 10,
+                          ),
+                          Expanded(
+                            child: Container(
+                              width: 80,
+                              height: 80,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10),
+                                color: Colors.teal,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              const SizedBox(
+                height: 12,
+              ),
               Row(
                 children: [
                   Expanded(
                     child: GestureDetector(
-                      onTap: (){
+                      onTap: () {
                         debugPrint(DoctorsBloc.get(context).doctors[0].name);
                       },
                       child: Container(
@@ -51,7 +146,8 @@ class HomePageWidget extends StatelessWidget {
                               CircleAvatar(
                                 radius: 38,
                                 // backgroundColor: Colors.white,
-                                backgroundImage: AssetImage('assets/images/doctor_visit.jpg'),
+                                backgroundImage: AssetImage(
+                                    'assets/images/doctor_visit.jpg'),
                               ),
                               SizedBox(
                                 height: 10,
@@ -61,7 +157,7 @@ class HomePageWidget extends StatelessWidget {
                                 style: TextStyle(
                                   fontSize: 14,
                                 ),
-                                ),
+                              ),
                             ],
                           ),
                         ),
@@ -84,7 +180,8 @@ class HomePageWidget extends StatelessWidget {
                             CircleAvatar(
                               radius: 38,
                               backgroundColor: Colors.blue,
-                              backgroundImage: AssetImage('assets/images/doctor_chat.jpg'),
+                              backgroundImage:
+                                  AssetImage('assets/images/doctor_chat.jpg'),
                             ),
                             SizedBox(
                               height: 10,
@@ -118,7 +215,8 @@ class HomePageWidget extends StatelessWidget {
                             CircleAvatar(
                               radius: 38,
                               backgroundColor: Colors.blue,
-                              backgroundImage: AssetImage('assets/images/mental_help.jpg'),
+                              backgroundImage:
+                                  AssetImage('assets/images/mental_help.jpg'),
                             ),
                             SizedBox(
                               height: 10,
@@ -145,21 +243,20 @@ class HomePageWidget extends StatelessWidget {
                   color: Colors.white,
                 ),
                 child: Padding(
-                  padding: const EdgeInsets.all(16.0),
+                  padding: const EdgeInsets.all(12.0),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Padding(
-                        padding: const EdgeInsets.symmetric(
-                          vertical: 20,
-                          horizontal: 10,
+                      const Padding(
+                        padding: EdgeInsets.only(
+                          bottom: 10,
                         ),
                         child: Text(
-                          'Let\'s find your Doctor',
+                          'Our services',
                           style: TextStyle(
-                            fontSize: 32,
+                            fontSize: 22,
                             fontWeight: FontWeight.bold,
-                            color: HexColor('00008B'),
+                            color: Colors.black,
                           ),
                         ),
                       ),
@@ -167,72 +264,112 @@ class HomePageWidget extends StatelessWidget {
                         children: [
                           Expanded(
                             child: GestureDetector(
-                              onTap: (){
-                                Navigator.push(context, MaterialPageRoute(builder: (context) => const DentistryHomeScreen(),),);
+                              onTap: () {
+                                debugPrint('Henaa');
+                                // debugPrint(AppointmentBloc.get(context).doctorAppointmentsData.toString());
                               },
-                              child: const CircleAvatar(
-                                radius: 40,
-                                backgroundColor: Colors.white,
-                                backgroundImage: AssetImage(
-                                  'assets/icons/teeth.png',
+                              child: Container(
+                                height: 100,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(10),
+                                  color: HexColor('#a4f5ec'),
+                                ),
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: const [
+                                    Icon(
+                                      Icons.phone,
+                                      size: 42,
+                                    ),
+                                    SizedBox(
+                                      height: 4,
+                                    ),
+                                    Text(
+                                      'Contact Doctor',
+                                      style: TextStyle(
+                                        color: Colors.black,
+                                        fontSize: 14,
+                                      ),
+                                    ),
+                                  ],
                                 ),
                               ),
                             ),
+                          ),
+                          const SizedBox(
+                            width: 8,
                           ),
                           Expanded(
                             child: GestureDetector(
-                              onTap: (){
-                                debugPrint(DoctorsBloc.get(context).doctors[1].name);
+                              onTap: () {
+                                debugPrint('Hennnaaa');
                               },
-                              child: const CircleAvatar(
-                                radius: 40,
-                                backgroundColor: Colors.white,
-                                backgroundImage: AssetImage(
-                                  'assets/icons/heart.png',
+                              child: Container(
+                                height: 100,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(10),
+                                  color: HexColor('#a4f5ec'),
+                                ),
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: const [
+                                    Icon(
+                                      Icons.note_alt_sharp,
+                                      size: 42,
+                                    ),
+                                    SizedBox(
+                                      height: 4,
+                                    ),
+                                    Text(
+                                      'Prescription picture',
+                                      textAlign: TextAlign.center,
+                                      style: TextStyle(
+                                        color: Colors.black,
+                                        fontSize: 14,
+                                      ),
+                                    ),
+                                  ],
                                 ),
                               ),
                             ),
                           ),
-                          const Expanded(
-                            child: CircleAvatar(
-                              radius: 40,
-                              backgroundColor: Colors.white,
-                              backgroundImage: AssetImage(
-                                'assets/icons/eye.png',
-                              ),
-                            ),
+                          const SizedBox(
+                            width: 8,
                           ),
-                          const Expanded(
-                            child: CircleAvatar(
-                              radius: 40,
-                              backgroundColor: Colors.white,
-                              backgroundImage: AssetImage(
-                                'assets/icons/syring.png',
+                          Expanded(
+                            child: GestureDetector(
+                              onTap: () {
+                                debugPrint('Hennnaaa');
+                              },
+                              child: Container(
+                                height: 100,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(10),
+                                  color: HexColor('#a4f5ec'),
+                                ),
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: const [
+                                    Icon(
+                                      Icons.photo_camera_outlined,
+                                      size: 42,
+                                    ),
+                                    SizedBox(
+                                      height: 4,
+                                    ),
+                                    Text(
+                                      'Product Picture',
+                                      style: TextStyle(
+                                        color: Colors.black,
+                                        fontSize: 14,
+                                      ),
+                                    ),
+                                  ],
+                                ),
                               ),
                             ),
                           ),
                         ],
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(
-                          vertical: 20,
-                        ),
-                        child: TextFormField(
-                          keyboardType: TextInputType.text,
-                          decoration: const InputDecoration(
-                            labelText: 'Search for all you medical tips',
-                            prefixIcon: Icon(Icons.search),
-                            border: OutlineInputBorder(),
-                            filled: true,
-                            fillColor: Colors.white,
-                            enabledBorder: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                color: Colors.white,
-                                width: 2,
-                              ),
-                            ),
-                          ),
-                        ),
                       ),
                     ],
                   ),
@@ -244,58 +381,128 @@ class HomePageWidget extends StatelessWidget {
               Container(
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10),
-                  color: HexColor('#F3F3F4'),
+                  color: Colors.white,
                 ),
-                width: double.infinity,
                 child: Padding(
-                  padding: const EdgeInsets.all(16.0),
+                  padding: const EdgeInsets.all(8.0),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
+                      const Text(
+                        'Add your medicine timings',
+                        style: TextStyle(
+                          fontSize: 22,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.black,
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 10,
+                      ),
                       Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           const Expanded(
                             child: Text(
-                              'Top Doctors',
+                              'Add reminder for your medicine',
                               style: TextStyle(
-                                fontSize: 28,
-                                fontWeight: FontWeight.bold,
+                                fontSize: 18,
+                                // fontWeight: FontWeight.bold,
                                 color: Colors.black,
                               ),
                             ),
                           ),
-                          TextButton(
-                              onPressed: (){
-                                Navigator.push(context, MaterialPageRoute(builder: (context) => const DoctorsListScreen()));
-                              },
-                              child: const Text(
-                                'See All',
-                                style: TextStyle(
-                                  color: Colors.lightBlue,
-                                  decoration: TextDecoration.underline,
-                                ),
+                          Container(
+                              clipBehavior: Clip.antiAlias,
+                              height: 45,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10),
+                                color: defaultColor,
                               ),
-                          ),
+                              child: MaterialButton(
+                                onPressed: () {
+                                  Navigator.push(context, MaterialPageRoute(builder: (context) => const MedicineTimingPage()));
+                                },
+                                child: const Text(
+                                  'Add',
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                  ),
+                                ),
+                              ))
                         ],
                       ),
-                      const SizedBox(
-                        height: 15,
-                      ),
-                      Container(
-                        height: 200,
-                        child: ListView.separated(
-                          physics: const BouncingScrollPhysics(),
-                            itemBuilder: (context, index) =>  TopDoctorsWidget(
-                                  name: DoctorsBloc.get(context).doctors[index].name,
-                                  specification: DoctorsBloc.get(context).doctors[index].specialization,
-                                  expYears: 5,
-                                  image: DoctorsBloc.get(context).doctors[index].imageUrl,
-                            ),
-                            separatorBuilder: (context, builder) => const SizedBox(
-                              height: 15,
-                            ),
-                            itemCount: DoctorsBloc.get(context).doctors.length,
+                    ],
+                  ),
+                ),
+              ),
+              const SizedBox(
+                height: 12,
+              ),
+              Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10),
+                  color: Colors.white,
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.all(12.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const Text(
+                        'Have any medical question?',
+                        style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
                         ),
+                      ),
+                      Row(
+                        mainAxisSize: MainAxisSize.max,
+                        children: [
+                          const Image(
+                            width: 100,
+                            height: 70,
+                            fit: BoxFit.cover,
+                            image: AssetImage('assets/images/Chat_icon.png'),
+                          ),
+                          Expanded(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: const [
+                                Text(
+                                  'Send your question and get the response withing 24 hours.',
+                                  style: TextStyle(
+                                    fontSize: 16,
+                                    // fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(
+                              left: 5,
+                            ),
+                            child: Container(
+                              clipBehavior: Clip.antiAlias,
+                              height: 45,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10),
+                                color: Colors.teal,
+                              ),
+                              child: MaterialButton(
+                                onPressed: () {},
+                                color: defaultColor,
+                                child: const Text(
+                                  'Ask Now',
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
                     ],
                   ),

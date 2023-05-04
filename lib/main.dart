@@ -9,6 +9,7 @@ import 'package:mentlo/features/doctors_list/page/doctors_list_screen.dart';
 import 'package:mentlo/features/home_page/page/home_page_screen.dart';
 import 'package:mentlo/features/layouts/main_layout.dart';
 import 'package:mentlo/features/onboarding/widgets/onboarding_widget.dart';
+import 'package:mentlo/features/settings_page/pages/edit_account_page.dart';
 import 'package:mentlo/features/settings_page/pages/settings_screen.dart';
 import 'package:mentlo/features/sign_in/page/signin_page.dart';
 import 'package:mentlo/features/sign_up/page/sigin_up_screen.dart';
@@ -30,10 +31,10 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (context) => AuthenticationBloc()),
         BlocProvider(create: (context) => NavigationBloc()),
         BlocProvider(create: (context) => DoctorsBloc()..getDoctors()..getDentists()..getCardiothoracic()..getSurgery()),
-        BlocProvider(create: (context) => AppointmentBloc()),
+        BlocProvider(create: (context) => AppointmentBloc()..getPatientAppointments()),
       ],
       child: MaterialApp(
-        title: 'Flutter Demo',
+        title: 'Mentlo',
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
           primarySwatch: Colors.blue,

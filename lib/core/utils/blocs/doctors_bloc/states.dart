@@ -22,7 +22,7 @@ class DoctorsBySpecializationErrorState extends DoctorsStates {
   DoctorsBySpecializationErrorState(this.error);
 }
 
-class DentistGetLoadingState extends DoctorsStates {}
+class GetDentistLoadingState extends DoctorsStates {}
 
 class DentistGetSuccessState extends DoctorsStates {}
 
@@ -31,7 +31,8 @@ class DentistGetErrorState extends DoctorsStates {
   DentistGetErrorState(this.error);
 }
 
-class CardiothoracicGetLoadingState extends DoctorsStates {}
+
+class GetCardiothoracicLoadingState extends DoctorsStates {}
 
 class CardiothoracicGetSuccessState extends DoctorsStates {}
 
@@ -40,7 +41,7 @@ class CardiothoracicGetErrorState extends DoctorsStates {
   CardiothoracicGetErrorState(this.error);
 }
 
-class SurgeryGetLoadingState extends DoctorsStates {}
+class GetSugaryLoadingState extends DoctorsStates {}
 
 class SurgeryGetSuccessState extends DoctorsStates {}
 

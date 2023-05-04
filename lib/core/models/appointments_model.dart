@@ -1,14 +1,14 @@
 class AppointmentModel {
   final String date;
   final String time;
-  final String userId;
+  final String Uid;
   final String doctorId;
-  final int appointmentId;
+  final String appointmentId;
 
   AppointmentModel({
     required this.date,
     required this.time,
-    required this.userId,
+    required this.Uid,
     required this.doctorId,
     required this.appointmentId,
   });
@@ -17,7 +17,7 @@ class AppointmentModel {
     return AppointmentModel(
       date: json['date'],
       time: json['time'],
-      userId: json['Uid'],
+      Uid: json['Uid'],
       doctorId: json['doctorId'],
       appointmentId: json['appointmentId'],
     );
@@ -27,7 +27,7 @@ class AppointmentModel {
     return {
       'date': date,
       'time': time,
-      'Uid': userId,
+      'Uid': Uid,
       'doctorId': doctorId,
       'appointmentId': appointmentId,
     };

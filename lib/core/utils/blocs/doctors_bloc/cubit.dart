@@ -51,6 +51,7 @@ class DoctorsBloc extends Cubit<DoctorsStates> {
   List<DentistModel> dentistList = [];
   // DentistModel? dentistModel;
   void getDentists(){
+    emit(GetDentistLoadingState());
     FirebaseFirestore.instance
         .collection('dentist')
         .get()
@@ -70,8 +71,9 @@ class DoctorsBloc extends Cubit<DoctorsStates> {
   List<CardiothoracicModel> cardiothoracicList = [];
   // CardiothoracicModel? cardiothoracicModel;
   void getCardiothoracic(){
+    emit(GetCardiothoracicLoadingState());
     FirebaseFirestore.instance
-        .collection('cardiothoracic')
+        .collection('cardiothoracic') 
         .get()
         .then((value)
     {
@@ -89,6 +91,7 @@ class DoctorsBloc extends Cubit<DoctorsStates> {
   List<SurgeryModel> surgeryList = [];
   // SurgeryModel? surgeryModel;
   void getSurgery(){
+    emit(GetSugaryLoadingState());
     FirebaseFirestore.instance
         .collection('surgery')
         .get()
