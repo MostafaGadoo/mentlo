@@ -1,3 +1,5 @@
+import 'package:dio/dio.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -234,6 +236,7 @@ class SignInWidget extends StatelessWidget {
                         ),
                       ),
                       const SizedBox(height: 10),
+
                       Container(
                         width: double.infinity,
                         decoration: BoxDecoration(
@@ -242,16 +245,26 @@ class SignInWidget extends StatelessWidget {
                         ),
                         child: MaterialButton(
                           onPressed: () {
-                            if (formKey.currentState!.validate()) {
-                              cubit.userSignIn(
-                                  email: emailController.text,
-                                  password: passwordController.text);
-                              showToast(
-                                  msg: 'Signed in successfully',
-                                  state: ToastState.SUCCESS);
-                            }
+                              if (formKey.currentState!.validate()) {
+                                cubit.userSignIn(
+                                    email: emailController.text,
+                                    password: passwordController.text);
+                                cubit.getUserData(uId: FirebaseAuth.instance.currentUser!.uid);
+                                showToast(
+                                    msg: 'Signed in successfully',
+                                    state: ToastState.SUCCESS);
+
+                              }else{
+                                showToast(
+                                    msg: 'PLease enter valid credentials',
+                                    state: ToastState.ERROR,
+                                );
+                              }
+
                           },
-                          child: const Text(
+                          child: state is SignInLoadingState ? const CircularProgressIndicator(
+                            color: Colors.white,
+                          ) : const Text(
                             'Sign In',
                             style: TextStyle(
                               color: Colors.white,

@@ -7,6 +7,7 @@ class SurgeryModel{
   final String name;
   final String phone;
   final String to;
+  final String specialization;
   final String workingDays;
 
   SurgeryModel({
@@ -18,6 +19,7 @@ class SurgeryModel{
     required this.name,
     required this.phone,
     required this.to,
+    required this.specialization,
     required this.workingDays,
   });
 
@@ -31,6 +33,7 @@ class SurgeryModel{
       to: json['to'],
       phone: json['phone'],
       imageURL: json['imageURL'],
+      specialization: json['specialization'],
       workingDays: json['workingDays'],
     );
   }

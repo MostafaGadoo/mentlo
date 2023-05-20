@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mentlo/core/utils/authentication_bloc/cubit.dart';
 import 'package:mentlo/core/utils/blocs/appointment_bloc/cubit.dart';
 import 'package:mentlo/core/utils/blocs/appointment_bloc/cubit.dart';
 import 'package:mentlo/core/utils/blocs/appointment_bloc/state.dart';
@@ -112,7 +113,7 @@ class ComplainsWidget extends StatelessWidget {
                               cubit.sendComplain(
                                 complain: complainController.text,
                                 doctorName: doctorsNameController.text,
-                                userId: appointmentID.text,
+                                userId: AuthenticationBloc.get(context).userModel.name!,
                               );
                               showToast(
                                 msg: 'Complain Sent Successfully',

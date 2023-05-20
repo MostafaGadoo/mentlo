@@ -2,6 +2,8 @@ import 'package:conditional_builder_null_safety/conditional_builder_null_safety.
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hexcolor/hexcolor.dart';
+import 'package:mentlo/core/models/user_model.dart';
+import 'package:mentlo/core/utils/authentication_bloc/cubit.dart';
 import 'package:mentlo/core/utils/blocs/appointment_bloc/cubit.dart';
 import 'package:mentlo/core/utils/blocs/doctors_bloc/cubit.dart';
 import 'package:mentlo/core/utils/blocs/doctors_bloc/states.dart';
@@ -32,12 +34,12 @@ class DentistryHomeWidget extends StatelessWidget {
                   body: ListView.separated(
                       physics: const BouncingScrollPhysics(),
                       itemBuilder: (context, index) => DefaultDoctorsListItem(
-                            profileImage: cubit.dentistList[index].imageURL,
-                            doctorName: cubit.dentistList[index].name,
-                            doctorEmail: cubit.dentistList[index].email,
-                            from: cubit.dentistList[index].from,
-                            to: cubit.dentistList[index].to,
-                            workingDays: cubit.dentistList[index].workingDays,
+                            profileImage: cubit.dentistDoctorsList[index].imageURL,
+                            doctorName: cubit.dentistDoctorsList[index].name,
+                            doctorEmail: cubit.dentistDoctorsList[index].email,
+                            from: cubit.dentistDoctorsList[index].from,
+                            to: cubit.dentistDoctorsList[index].to,
+                            workingDays: cubit.dentistDoctorsList[index].workingDays,
                             appointmentBooked: () {
                               debugPrint('Appointment Booked');
                               isBottomSheetShown = true;
@@ -167,15 +169,13 @@ class DentistryHomeWidget extends StatelessWidget {
                                                           .text.isNotEmpty) {
                                                     appointmentCubit
                                                         .bookAppointment(
-                                                            date: dateController
-                                                                .text,
-                                                            time: timeController
-                                                                .text,
-                                                            userId: '1',
-                                                            doctorId: cubit
-                                                                .dentistList[
-                                                                    index]
-                                                                .doctorId);
+                                                            date: dateController.text,
+                                                            time: timeController.text,
+                                                            userId: AuthenticationBloc.get(context).userModel.uId!,
+                                                            doctorId: cubit.dentistDoctorsList[index].doctorId,
+                                                            doctorName: cubit.dentistDoctorsList[index].name,
+                                                            doctorSpeciality: cubit.dentistDoctorsList[index].specialization,
+                                                    );
                                                     Navigator.pop(context);
                                                     isBottomSheetShown = false;
                                                     dateController.clear();
@@ -185,6 +185,7 @@ class DentistryHomeWidget extends StatelessWidget {
                                                             'Appointment Booked',
                                                         state:
                                                             ToastState.SUCCESS);
+                                                    AppointmentBloc.get(context).getPatientAppointments(uid: AuthenticationBloc.get(context).userModel.uId!);
                                                   } else {
                                                     showToast(
                                                         msg:
@@ -214,7 +215,7 @@ class DentistryHomeWidget extends StatelessWidget {
                       separatorBuilder: (context, index) => const SizedBox(
                             height: 8,
                           ),
-                      itemCount: cubit.dentistList.length),
+                      itemCount: cubit.dentistDoctorsList.length),
                 ),
             fallback: (context) => Center(
                     child: Column(

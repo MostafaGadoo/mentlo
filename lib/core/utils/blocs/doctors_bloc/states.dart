@@ -24,29 +24,29 @@ class DoctorsBySpecializationErrorState extends DoctorsStates {
 
 class GetDentistLoadingState extends DoctorsStates {}
 
-class DentistGetSuccessState extends DoctorsStates {}
+class GetDentistSuccessState extends DoctorsStates {}
 
-class DentistGetErrorState extends DoctorsStates {
+class GetDentistErrorState extends DoctorsStates {
   final String error;
-  DentistGetErrorState(this.error);
+  GetDentistErrorState(this.error);
 }
 
 
 class GetCardiothoracicLoadingState extends DoctorsStates {}
 
-class CardiothoracicGetSuccessState extends DoctorsStates {}
+class GetCardiothoracicSuccessState extends DoctorsStates {}
 
-class CardiothoracicGetErrorState extends DoctorsStates {
+class GetCardiothoracicErrorState extends DoctorsStates {
   final String error;
-  CardiothoracicGetErrorState(this.error);
+  GetCardiothoracicErrorState(this.error);
 }
 
 class GetSugaryLoadingState extends DoctorsStates {}
 
-class SurgeryGetSuccessState extends DoctorsStates {}
+class GetSurgerySuccessState extends DoctorsStates {}
 
-class SurgeryGetErrorState extends DoctorsStates {
+class GetSurgeryErrorState extends DoctorsStates {
   final String error;
-  SurgeryGetErrorState(this.error);
+  GetSurgeryErrorState(this.error);
 }
 

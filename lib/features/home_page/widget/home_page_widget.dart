@@ -3,11 +3,14 @@ import 'package:hexcolor/hexcolor.dart';
 import 'package:mentlo/core/utils/authentication_bloc/cubit.dart';
 import 'package:mentlo/core/utils/blocs/appointment_bloc/cubit.dart';
 import 'package:mentlo/core/utils/blocs/doctors_bloc/cubit.dart';
+import 'package:mentlo/core/utils/blocs/mental_health_model_bloc/cubit.dart';
 import 'package:mentlo/core/utils/shared_widgets/topDoctorsWidget.dart';
 import 'package:mentlo/core/utils/styles/colors.dart';
 import 'package:mentlo/core/utils/styles/icon_broken.dart';
 import 'package:mentlo/features/dentistry/pages/dentistry_home_screen.dart';
 import 'package:mentlo/features/doctors_list/page/doctors_list_screen.dart';
+import 'package:mentlo/features/home_page/page/pilates_page.dart';
+import 'package:mentlo/features/home_page/page/yoga_page.dart';
 import 'package:mentlo/features/medicine_timing/page/medicine_timing_page.dart';
 
 class HomePageWidget extends StatelessWidget {
@@ -103,46 +106,58 @@ class HomePageWidget extends StatelessWidget {
                         Row(
                           children: [
                             Expanded(
-                              child: Column(
-                                children: const [
-                                  Image(
-                                      width: 80,
-                                      height: 80,
-                                      image: AssetImage('assets/images/yoga.jpg')
-                                  ),
-                                  SizedBox(height: 5,),
-                                  Text(
-                                    'Yoga',
-                                    style: TextStyle(
-                                      fontSize: 14,
-                                      // fontWeight: FontWeight.bold,
-                                      color: Colors.black,
+                              child: GestureDetector(
+                                onTap:(){
+                                  debugPrint('Yoga');
+                                  Navigator.push(context, MaterialPageRoute(builder: (context) => const YogaPage()));
+                                },
+                                child: Column(
+                                  children: const [
+                                    Image(
+                                        width: 80,
+                                        height: 80,
+                                        image: AssetImage('assets/images/yoga.jpg')
                                     ),
-                                  ),
-                                ],
+                                    SizedBox(height: 5,),
+                                    Text(
+                                      'Yoga',
+                                      style: TextStyle(
+                                        fontSize: 14,
+                                        // fontWeight: FontWeight.bold,
+                                        color: Colors.black,
+                                      ),
+                                    ),
+                                  ],
+                                ),
                               ),
                             ),
                             const SizedBox(
                               width: 10,
                             ),
                             Expanded(
-                              child: Column(
-                                children: const [
-                                  Image(
-                                      width: 80,
-                                      height: 80,
-                                      image: AssetImage('assets/images/Pilates.jpg')
-                                  ),
-                                  SizedBox(height: 5,),
-                                  Text(
-                                    'Pilates',
-                                    style: TextStyle(
-                                      fontSize: 14,
-                                      // fontWeight: FontWeight.bold,
-                                      color: Colors.black,
+                              child: GestureDetector(
+                                onTap: (){
+                                  debugPrint('Pilates');
+                                  Navigator.push(context, MaterialPageRoute(builder: (context) => const PilatesPage()));
+                                },
+                                child: Column(
+                                  children: const [
+                                    Image(
+                                        width: 80,
+                                        height: 80,
+                                        image: AssetImage('assets/images/Pilates.jpg')
                                     ),
-                                  ),
-                                ],
+                                    SizedBox(height: 5,),
+                                    Text(
+                                      'Pilates',
+                                      style: TextStyle(
+                                        fontSize: 14,
+                                        // fontWeight: FontWeight.bold,
+                                        color: Colors.black,
+                                      ),
+                                    ),
+                                  ],
+                                ),
                               ),
                             ),
                             const SizedBox(
@@ -205,7 +220,7 @@ class HomePageWidget extends StatelessWidget {
                     Expanded(
                       child: GestureDetector(
                         onTap: () {
-                          debugPrint(DoctorsBloc.get(context).doctors[0].name);
+                          // debugPrint(DoctorsBloc.get(context).doctors[0].name);
                         },
                         child: Container(
                           decoration: BoxDecoration(
@@ -276,31 +291,37 @@ class HomePageWidget extends StatelessWidget {
                       width: 10,
                     ),
                     Expanded(
-                      child: Container(
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                          color: Colors.white,
-                        ),
-                        child: Padding(
-                          padding: const EdgeInsets.all(20.0),
-                          child: Column(
-                            children: const [
-                              CircleAvatar(
-                                radius: 38,
-                                backgroundColor: Colors.blue,
-                                backgroundImage:
-                                    AssetImage('assets/images/mental_help.jpg'),
-                              ),
-                              SizedBox(
-                                height: 10,
-                              ),
-                              Text(
-                                'Mental Help',
-                                style: TextStyle(
-                                  fontSize: 14,
+                      child: GestureDetector(
+                        onTap: (){
+                          MentalHealthBloc.get(context).getModelData();
+                          debugPrint('Mental Help');
+                        },
+                        child: Container(
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
+                            color: Colors.white,
+                          ),
+                          child: Padding(
+                            padding: const EdgeInsets.all(20.0),
+                            child: Column(
+                              children: const [
+                                CircleAvatar(
+                                  radius: 38,
+                                  backgroundColor: Colors.blue,
+                                  backgroundImage:
+                                      AssetImage('assets/images/mental_help.jpg'),
                                 ),
-                              ),
-                            ],
+                                SizedBox(
+                                  height: 10,
+                                ),
+                                Text(
+                                  'Mental Help',
+                                  style: TextStyle(
+                                    fontSize: 14,
+                                  ),
+                                ),
+                              ],
+                            ),
                           ),
                         ),
                       ),
@@ -339,6 +360,9 @@ class HomePageWidget extends StatelessWidget {
                               child: GestureDetector(
                                 onTap: () {
                                   debugPrint('Henaa');
+                                  debugPrint(DoctorsBloc.get(context).surgeryDoctorsList.length.toString());
+                                  debugPrint(DoctorsBloc.get(context).cardiothoracicDoctorsList.length.toString());
+                                  debugPrint(DoctorsBloc.get(context).dentistDoctorsList.length.toString());
                                 },
                                 child: Container(
                                   height: 100,
@@ -375,6 +399,8 @@ class HomePageWidget extends StatelessWidget {
                               child: GestureDetector(
                                 onTap: () {
                                   debugPrint('Hennnaaa');
+                                  debugPrint(AppointmentBloc.get(context).patientAppointments[0].date.toString());
+
                                 },
                                 child: Container(
                                   height: 100,
@@ -412,6 +438,7 @@ class HomePageWidget extends StatelessWidget {
                               child: GestureDetector(
                                 onTap: () {
                                   debugPrint('Hennnaaa');
+                                  
                                 },
                                 child: Container(
                                   height: 100,

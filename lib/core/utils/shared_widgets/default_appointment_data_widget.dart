@@ -5,6 +5,7 @@ class DefaultAppointmentDataWidget extends StatelessWidget {
   final String specialization;
   final String date;
   final String time;
+  final VoidCallback? editAppointment;
 
   const DefaultAppointmentDataWidget({
     Key? key,
@@ -12,6 +13,7 @@ class DefaultAppointmentDataWidget extends StatelessWidget {
     required this.specialization,
     required this.date,
     required this.time,
+    required this.editAppointment,
   }) : super(key: key);
 
   @override
@@ -46,10 +48,17 @@ class DefaultAppointmentDataWidget extends StatelessWidget {
                       ),
                     ),
                   ),
-                  const Icon(
-                    Icons.fact_check_outlined,
-                    color: Colors.teal,
-                    size: 30,
+                  GestureDetector(
+                    onTap: (){
+                      editAppointment!();
+
+                      debugPrint('button pressed');
+                    },
+                    child: const Icon(
+                      Icons.edit,
+                      color: Colors.teal,
+                      size: 30,
+                    ),
                   ),
                 ],
               ),
