@@ -73,3 +73,36 @@ class SaveMedicineDataErrorState extends AppointmentStates {
 
   SaveMedicineDataErrorState(this.error);
 }
+
+class EditAppointmentLoadingState extends AppointmentStates {}
+
+class EditAppointmentSuccessState extends AppointmentStates {}
+
+class EditAppointmentErrorState extends AppointmentStates {
+  final String error;
+
+  EditAppointmentErrorState(this.error);
+}
+
+class GetMedicineTimingLoadingState extends AppointmentStates {}
+
+class GetMedicineTimingSuccessState extends AppointmentStates {}
+
+class GetMedicineTimingErrorState extends AppointmentStates {
+  final String error;
+
+  GetMedicineTimingErrorState(this.error);
+}
+
+class GetAppointmentOnSpecificDateLoadingState extends AppointmentStates {}
+
+class GetAppointmentOnSpecificDateSuccessState extends AppointmentStates {}
+
+class GetAppointmentOnSpecificDateErrorState extends AppointmentStates {
+  final String error;
+
+  GetAppointmentOnSpecificDateErrorState(this.error);
+}
+
+
+

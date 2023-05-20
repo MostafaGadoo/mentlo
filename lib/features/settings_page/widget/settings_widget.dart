@@ -24,6 +24,7 @@ import 'package:mentlo/features/settings_page/pages/complains_page.dart';
 import 'package:mentlo/features/settings_page/pages/credit_card_page.dart';
 import 'package:mentlo/features/settings_page/pages/edit_account_page.dart';
 import 'package:mentlo/features/settings_page/pages/feedback_page.dart';
+import 'package:mentlo/features/sign_in/page/signin_page.dart';
 import 'package:overlay_support/overlay_support.dart';
 
 class SettingsWidget extends StatelessWidget {
@@ -354,7 +355,7 @@ class SettingsWidget extends StatelessWidget {
                                           onPressed: () {
                                             debugPrint('sent');
                                             AppointmentBloc.get(context).sendFeedback(
-                                              userId: '1',
+                                              userId: authCubit.userModel.name!,
                                               msg: ratingController.text,
                                               rating: ratingStars!,);
                                               Navigator.pop(context);
@@ -409,6 +410,11 @@ class SettingsWidget extends StatelessWidget {
                       text: 'Log out',
                       icon: Icons.logout,
                       onTap: ()  {
+                        AuthenticationBloc.get(context).userLogOut();
+                        Navigator.pushAndRemoveUntil(
+                            context,
+                            MaterialPageRoute(builder: (context) => const SignInScreen()),
+                                (Route<dynamic> route) => false);
                         debugPrint('Log out');
                       },
                     ),

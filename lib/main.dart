@@ -4,7 +4,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mentlo/core/utils/authentication_bloc/cubit.dart';
 import 'package:mentlo/core/utils/blocs/appointment_bloc/cubit.dart';
 import 'package:mentlo/core/utils/blocs/doctors_bloc/cubit.dart';
+import 'package:mentlo/core/utils/blocs/mental_health_model_bloc/cubit.dart';
 import 'package:mentlo/core/utils/blocs/navigation_bloc/cubit.dart';
+import 'package:mentlo/features/admin_side/admin_home_page/page/admin_home_page.dart';
+import 'package:mentlo/features/admin_side/admin_layout/admin_main_layout.dart';
+import 'package:mentlo/features/admin_side/admin_layout/layout_bloc/cubit.dart';
 import 'package:mentlo/features/doctors_list/page/doctors_list_screen.dart';
 import 'package:mentlo/features/home_page/page/home_page_screen.dart';
 import 'package:mentlo/features/layouts/main_layout.dart';
@@ -28,10 +32,12 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider(create: (context) => AuthenticationBloc()..getUserData()),
+        BlocProvider(create: (context) => AuthenticationBloc()),
         BlocProvider(create: (context) => NavigationBloc()),
-        BlocProvider(create: (context) => DoctorsBloc()..getDoctors()..getDentists()..getCardiothoracic()..getSurgery()),
-        BlocProvider(create: (context) => AppointmentBloc()..getPatientAppointments()),
+        BlocProvider(create: (context) => DoctorsBloc()..getDentistDoctors()..getSurgeryDoctors()..getCardiothoracicDoctors()),
+        BlocProvider(create: (context) => AppointmentBloc()..getPatientAppointments(uid: AuthenticationBloc.get(context).userModel.uId!)),
+        BlocProvider(create: (context) => MentalHealthBloc()),
+        BlocProvider(create: (context) => AdminNavigationBloc()),
       ],
       child: MaterialApp(
         title: 'Mentlo',
@@ -44,7 +50,7 @@ class MyApp extends StatelessWidget {
             elevation: 0,
           ),
         ),
-        home: const SignInScreen(),
+        home: const OnBoardingWidget(),
       ),
     );
   }

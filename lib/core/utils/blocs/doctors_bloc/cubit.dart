@@ -13,98 +13,85 @@ class DoctorsBloc extends Cubit<DoctorsStates> {
 
   static DoctorsBloc get(context) => BlocProvider.of(context);
 
-  List<DoctorModel> doctors = [];
+  List<SurgeryModel> surgeryDoctorsList = [];
 
-  void getDoctors() {
-    FirebaseFirestore.instance.collection('doctors').get().then((value) {
+  // void getSurgeryDoctors() {
+  //   FirebaseFirestore.instance.collection('doctors')
+  //       .where('specialization', isEqualTo: 'surgery')
+  //       .get().then((value) {
+  //     value.docs.forEach((element) {
+  //       surgeryDoctorsList.add(SurgeryModel.fromJson(element.data()));
+  //     });
+  //     emit(DoctorsSuccessState());
+  //   }).catchError((error) {
+  //     debugPrint(error.toString());
+  //     emit(DoctorsErrorState(error.toString()));
+  //   });
+  // }
+  void getSurgeryDoctors() {
+    emit(DoctorsLoadingState());
+    FirebaseFirestore.instance.collection('doctors')
+        .where('specialization', isEqualTo: 'surgery')
+        .get().then((value) {
       value.docs.forEach((element) {
-        doctors.add(DoctorModel.fromJson(element.data()));
+        surgeryDoctorsList.add(SurgeryModel.fromJson(element.data()));
       });
-      emit(DoctorsSuccessState());
+      emit(GetSurgerySuccessState());
     }).catchError((error) {
       debugPrint(error.toString());
-      emit(DoctorsErrorState(error.toString()));
+      emit(GetSurgeryErrorState(error.toString()));
+    });
+  }
+  List<CardiothoracicModel> cardiothoracicDoctorsList = [];
+
+  void getCardiothoracicDoctors() {
+    emit(GetCardiothoracicLoadingState());
+    FirebaseFirestore.instance.collection('doctors')
+        .where('specialization', isEqualTo: 'cardiothoracic')
+        .get().then((value) {
+      value.docs.forEach((element) {
+        cardiothoracicDoctorsList.add(CardiothoracicModel.fromJson(element.data()));
+      });
+      emit(GetCardiothoracicSuccessState());
+    }).catchError((error) {
+      debugPrint(error.toString());
+      emit(GetCardiothoracicErrorState(error.toString()));
     });
   }
 
-  List<DoctorModel> doctorsSpecialization = [];
+  List<DentistModel> dentistDoctorsList = [];
 
-  void getDoctorsByCategory(String category) {
-    FirebaseFirestore.instance
-        .collection('doctors')
-        .where('specialization', isEqualTo: category)
-        .get()
-        .then((value) {
+  void getDentistDoctors() {
+    emit(GetDentistLoadingState());
+    FirebaseFirestore.instance.collection('doctors')
+        .where('specialization', isEqualTo: 'Dentistry')
+        .get().then((value) {
       value.docs.forEach((element) {
-        doctorsSpecialization.add(DoctorModel.fromJson(element.data()));
+        dentistDoctorsList.add(DentistModel.fromJson(element.data()));
       });
-          emit(DoctorsBySpecializationSuccessState());
-    })
-        .catchError((error) {
+      emit(GetDentistSuccessState());
+    }).catchError((error) {
       debugPrint(error.toString());
-      emit(DoctorsBySpecializationErrorState(error));
+      emit(GetDentistErrorState(error.toString()));
     });
   }
 
   late TabController tabController;
 
-  List<DentistModel> dentistList = [];
-  // DentistModel? dentistModel;
-  void getDentists(){
-    emit(GetDentistLoadingState());
-    FirebaseFirestore.instance
-        .collection('dentist')
-        .get()
-        .then((value)
-    {
-      value.docs.forEach((element) {
-        // dentistModel = DentistModel.fromJson(element.data());
-        dentistList.add(DentistModel.fromJson(element.data()));
-      });
-      emit(DentistGetSuccessState());
-    })
-        .catchError((error){
-      emit(DentistGetErrorState(error.toString()));
-    });
-  }
 
-  List<CardiothoracicModel> cardiothoracicList = [];
-  // CardiothoracicModel? cardiothoracicModel;
-  void getCardiothoracic(){
-    emit(GetCardiothoracicLoadingState());
-    FirebaseFirestore.instance
-        .collection('cardiothoracic') 
-        .get()
-        .then((value)
-    {
+  void getDoctorById({
+  required String doctorId,
+}){
+    FirebaseFirestore.instance.collection('doctors')
+        .where('specialization', isEqualTo: 'Dentistry')
+        .get().then((value) {
       value.docs.forEach((element) {
-        // cardiothoracicModel = CardiothoracicModel.fromJson(element.data());
-        cardiothoracicList.add(CardiothoracicModel.fromJson(element.data()));
+        dentistDoctorsList.add(DentistModel.fromJson(element.data()));
       });
-      emit(CardiothoracicGetSuccessState());
-    })
-        .catchError((error){
-      emit(CardiothoracicGetErrorState(error.toString()));
-    });
-  }
-
-  List<SurgeryModel> surgeryList = [];
-  // SurgeryModel? surgeryModel;
-  void getSurgery(){
-    emit(GetSugaryLoadingState());
-    FirebaseFirestore.instance
-        .collection('surgery')
-        .get()
-        .then((value)
-    {
-      value.docs.forEach((element) {
-        // surgeryModel = SurgeryModel.fromJson(element.data());
-        surgeryList.add(SurgeryModel.fromJson(element.data()));
-      });
-      emit(SurgeryGetSuccessState());
-    })
-        .catchError((error){
-      emit(SurgeryGetErrorState(error.toString()));
+      emit(GetDentistSuccessState());
+    }).catchError((error) {
+      debugPrint(error.toString());
+      emit(GetDentistErrorState(error.toString()));
     });
   }
 }

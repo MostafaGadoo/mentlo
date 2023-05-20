@@ -13,7 +13,7 @@ class AuthenticationBloc extends Cubit<AuthenticationState>{
 
   UserModel userModel = UserModel();
 
-  void getUserData(){
+  void getUserData({required String uId}){
     emit(GetUserLoadingState());
     FirebaseFirestore.instance
         .collection('users')
@@ -43,6 +43,7 @@ class AuthenticationBloc extends Cubit<AuthenticationState>{
       ).then((value){
         debugPrint(value.user!.email);
         debugPrint(value.user!.uid);
+        getUserData(uId: value.user!.uid);
         userCreate(
           name: name,
           email: email,
@@ -92,6 +93,7 @@ class AuthenticationBloc extends Cubit<AuthenticationState>{
       password: password!,
     )
         .then((value) {
+          debugPrint(value.user.toString());
       debugPrint(value.user!.email);
       debugPrint(value.user!.uid);
       debugPrint('login success');
@@ -115,5 +117,29 @@ class AuthenticationBloc extends Cubit<AuthenticationState>{
 
   }
 
+  void updateUserData({ required String name,required String email,required String phone}){
+    emit(UpdateUserDataLoadingState());
+    FirebaseFirestore.instance
+        .collection('users').doc(FirebaseAuth.instance.currentUser!.uid)
+        .update({
+      'name': name,
+      'email': email,
+      'phone': phone,
+    }).then((value) {
+      emit(UpdateUserDataLoadingState());
+      debugPrint('user updated');
+    })
+        .catchError((error){
+          emit(UpdateUserDataErrorState(error.toString()));
+    });
+  }
 
+  void userLogOut(){
+    emit(SignOutLoadingState());
+    FirebaseAuth.instance.signOut().then((value){
+      emit(SignInSuccessState());
+    }).catchError((error){
+      emit(SignUpErrorState(error.toString()));
+    });
+  }
 }

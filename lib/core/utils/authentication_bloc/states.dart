@@ -39,3 +39,22 @@ class GetUserErrorState extends AuthenticationState{
   final String error;
   GetUserErrorState(this.error);
 }
+
+class UpdateUserDataLoadingState extends AuthenticationState{}
+
+class UpdateUserDataSuccessState extends AuthenticationState{}
+
+class UpdateUserDataErrorState extends AuthenticationState{
+  final String error;
+  UpdateUserDataErrorState(this.error);
+}
+
+
+class SignOutLoadingState extends AuthenticationState{}
+
+class SignOutSuccessState extends AuthenticationState{}
+
+class SignOutErrorState extends AuthenticationState{
+  final String error;
+  SignOutErrorState(this.error);
+}

@@ -2,6 +2,7 @@ import 'package:conditional_builder_null_safety/conditional_builder_null_safety.
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hexcolor/hexcolor.dart';
+import 'package:mentlo/core/utils/authentication_bloc/cubit.dart';
 import 'package:mentlo/core/utils/blocs/appointment_bloc/cubit.dart';
 import 'package:mentlo/core/utils/blocs/doctors_bloc/cubit.dart';
 import 'package:mentlo/core/utils/blocs/doctors_bloc/states.dart';
@@ -32,12 +33,12 @@ class CardiothoracicWidget extends StatelessWidget {
               body: ListView.separated(
                   physics: const BouncingScrollPhysics(),
                   itemBuilder: (context, index) => DefaultDoctorsListItem(
-                    profileImage: cubit.cardiothoracicList[index].imageURL,
-                    doctorName: cubit.cardiothoracicList[index].name,
-                    doctorEmail: cubit.cardiothoracicList[index].email,
-                    from: cubit.cardiothoracicList[index].from,
-                    to: cubit.cardiothoracicList[index].to,
-                    workingDays: cubit.cardiothoracicList[index].workingDays,
+                    profileImage: cubit.cardiothoracicDoctorsList[index].imageURL,
+                    doctorName: cubit.cardiothoracicDoctorsList[index].name,
+                    doctorEmail: cubit.cardiothoracicDoctorsList[index].email,
+                    from: cubit.cardiothoracicDoctorsList[index].from,
+                    to: cubit.cardiothoracicDoctorsList[index].to,
+                    workingDays: cubit.cardiothoracicDoctorsList[index].workingDays,
                     appointmentBooked: () {
                       debugPrint('Appointment Booked');
                       isBottomSheetShown = true;
@@ -160,10 +161,11 @@ class CardiothoracicWidget extends StatelessWidget {
                                             appointmentCubit.bookAppointment(
                                                 date: dateController.text,
                                                 time: timeController.text,
-                                                userId: '1',
-                                                doctorId: cubit
-                                                    .dentistList[index]
-                                                    .doctorId);
+                                                userId: AuthenticationBloc.get(context).userModel.uId!,
+                                                doctorId: cubit.cardiothoracicDoctorsList[index].doctorId,
+                                                doctorName: cubit.cardiothoracicDoctorsList[index].name,
+                                                doctorSpeciality: cubit.cardiothoracicDoctorsList[index].specialization,
+                                            );
                                             Navigator.pop(context);
                                             isBottomSheetShown = false;
                                             dateController.clear();
@@ -171,6 +173,7 @@ class CardiothoracicWidget extends StatelessWidget {
                                             showToast(
                                                 msg: 'Appointment Booked',
                                                 state: ToastState.SUCCESS);
+                                            AppointmentBloc.get(context).getPatientAppointments(uid: AuthenticationBloc.get(context).userModel.uId!);
                                           } else {
                                             showToast(
                                                 msg:
@@ -199,7 +202,7 @@ class CardiothoracicWidget extends StatelessWidget {
                   separatorBuilder: (context, index) => const SizedBox(
                     height: 8,
                   ),
-                  itemCount: cubit.cardiothoracicList.length),
+                  itemCount: cubit.cardiothoracicDoctorsList.length),
             ),
             fallback: (context) =>  Center(
                 child: Column(

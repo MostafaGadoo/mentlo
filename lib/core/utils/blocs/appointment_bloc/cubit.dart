@@ -6,12 +6,15 @@ import 'package:mentlo/core/models/appointments_model.dart';
 import 'package:mentlo/core/models/complains_model.dart';
 import 'package:mentlo/core/models/feedback_model.dart';
 import 'package:mentlo/core/models/medicine_model.dart';
+import 'package:mentlo/core/utils/authentication_bloc/cubit.dart';
 import 'package:mentlo/core/utils/blocs/appointment_bloc/state.dart';
+import 'package:path/path.dart';
 import 'package:table_calendar/table_calendar.dart';
 
 class AppointmentBloc extends Cubit<AppointmentStates> {
   AppointmentBloc() : super(AppointmentInitialState());
 
+  // static AppointmentBloc get(context) => BlocProvider.of(context);
   static AppointmentBloc get(context) => BlocProvider.of(context);
 
   AppointmentModel? appointments;
@@ -30,28 +33,34 @@ class AppointmentBloc extends Cubit<AppointmentStates> {
     });
   }
 
-  int appointmentID = 0;
+
   void bookAppointment({
     required String date,
     required String time,
     required String userId,
     required String doctorId,
+    required String doctorName,
+    required String doctorSpeciality,
   }){
     AppointmentModel appointmentModel = AppointmentModel(
       date: date,
       time: time,
       Uid: userId,
       doctorId: doctorId,
-      appointmentId: (appointmentID+1).toString(),
+      doctorName: doctorName,
+      doctorSpecialization: doctorSpeciality,
+      appointmentId: FirebaseFirestore.instance.collection('appointments').doc().id,
     );
     FirebaseFirestore.instance
         .collection('appointments')
         .doc()
         .set(appointmentModel.toJson())
         .then((value){
+          // appointmentID = (appointmentModel.appointmentId+1.toString()) as int;
       emit(AppointmentSaveSuccessState());
-      appointmentID = appointmentID+1;
+
       debugPrint('Appointment Booked');
+
     }).catchError((error){
       emit(AppointmentSaveErrorState(error.toString()));
       debugPrint('Appointment Error');
@@ -65,14 +74,16 @@ class AppointmentBloc extends Cubit<AppointmentStates> {
   void selectedDay(DateTime selectedDay, DateTime focusedDay){
     dayFocused = selectedDay;
     // daySelected = selectedDay;
+    // getPatientAppointments(uid: AuthenticationBloc.get(context).userModel.uId!);
     debugPrint(dayFocused.toString().split(' ')[0]);
     // debugPrint(daySelected.toString().split(' ')[0]);
+
     emit(AppointmentDaySelectionState());
   }
 
   List<dynamic> dayAppointments(DateTime day){
     // write the logic to get the appointments for a specific day
-    return [];
+    return patientAppointments.where((element) => element.date == day.toString().split(' ')[0]).toList();
   }
 
   CalendarFormat? calendarFormat;
@@ -83,19 +94,22 @@ class AppointmentBloc extends Cubit<AppointmentStates> {
 
 
   AppointmentModel? patientAppointment;
-  List<String> patientAppointments = [];
-  void getPatientAppointments(){
+  List<AppointmentModel> patientAppointments = [];
+    void getPatientAppointments({
+  required String uid,
+}){
 
     emit(GetPatientAppointmentsLoadingState());
     
     FirebaseFirestore.instance.collection('appointments')
-    .where('Uid', isEqualTo: 'FzwWU95tRvRaQTHBjGvbyGrnGAA3')
-    .where('date', isEqualTo: '2023-03-28').get().then((value){
+    .where('Uid', isEqualTo: uid)
+    .get().then((value){
       debugPrint(value.docs.length.toString());
       value.docs.forEach((element) {
-        patientAppointments.add(element.data().toString());
+        patientAppointments.add(AppointmentModel.fromJson(element.data()));
         patientAppointment = AppointmentModel.fromJson(element.data());
         // debugPrint(element.data().toString());
+        // patientAppointments =[];
       });
       emit(GetPatientAppointmentSuccessState());
     }).catchError((error){
@@ -186,19 +200,79 @@ class AppointmentBloc extends Cubit<AppointmentStates> {
       debugPrint('Medicine Error');
     });
   }
-  // List<String> doctorAppointmentsData = [];
-  // void getAppointmentDoctorData(){
-  //   emit(GetPatientAppointmentsDoctorDataLoadingState());
-  //   FirebaseFirestore.instance.collection('dentist')
-  //       .where('doctorId', isEqualTo: patientAppointment!.doctorId).get().then((value) {
-  //     debugPrint(value.docs.length.toString());
-  //     value.docs.forEach((element) {
-  //       debugPrint(element.data().toString());
-  //     });
-  //     emit(GetPatientAppointmentDoctorDataSuccessState());
+
+  void editAppointment(
+  {
+  required String date,
+    required String time,
+    }
+      ){
+      emit(EditAppointmentLoadingState());
+      FirebaseFirestore.instance
+          .collection('appointments')
+          .doc()
+          .update({
+        'date': date,
+        'time': time,
+      }).then((value){
+        emit(EditAppointmentSuccessState());
+        debugPrint('Appointment Edited');
+      }).catchError((error){
+        emit(EditAppointmentErrorState(error.toString()));
+        debugPrint('Appointment Error');
+      });
+  }
+
+  List<AppointmentModel> dayPatientAppointments = [];
+  void getAppointmentOnSpecificDate({
+  required String userId,
+}){
+    emit(GetAppointmentOnSpecificDateLoadingState());
+    FirebaseFirestore.instance
+        .collection('appointments')
+        .where('date', isEqualTo: dayFocused.toString().split(' ')[0])
+        .where('Uid', isEqualTo: userId)
+        .get().then((value){
+          value.docs.forEach((element) {
+            dayPatientAppointments.add(AppointmentModel.fromJson(element.data()));
+            // patientAppointment = AppointmentModel.fromJson(element.data());
+            // debugPrint(element.data().toString());
+            // patientAppointments =[];
+          });
+      emit(GetAppointmentOnSpecificDateSuccessState());
+    }).catchError((error){
+      emit(GetAppointmentOnSpecificDateErrorState(error.toString()));
+    });
+  }
+  // void deleteAppointment(){
+  // emit(DeleteAppointmentLoadingState());
+  //   FirebaseFirestore.instance
+  //       .collection('appointments').where()
+  //       .delete()
+  //       .then((value){
+  //     emit(DeleteAppointmentSuccessState());
+  //     debugPrint('Appointment Deleted');
   //   }).catchError((error){
-  //     debugPrint(error.toString());
-  //     emit(GetPatientAppointmentDoctorDataErrorState(error.toString()));
+  //     emit(DeleteAppointmentErrorState(
+  //         error.toString()));
+  //     debugPrint('Appointment Error');
+  //   });
+  // }
+
+  // List<MedicineModel> medicineTimings = [];
+  // void getMedicineData(){
+  //   emit(GetMedicineTimingLoadingState());
+  //
+  //   FirebaseFirestore.instance
+  //       .collection('medicineTiming')
+  //       .doc()
+  //       .get()
+  //       .then((value) {
+  //     medicineTimings =
+  //     debugPrint(appointments!.date);
+  //     emit(GetMedicineTimingSuccessState());
+  //   }).catchError((error) {
+  //     emit(GetMedicineTimingErrorState(error.toString()));
   //   });
   // }
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mentlo/core/utils/authentication_bloc/cubit.dart';
 import 'package:mentlo/core/utils/blocs/appointment_bloc/cubit.dart';
 import 'package:mentlo/core/utils/blocs/appointment_bloc/cubit.dart';
 import 'package:mentlo/core/utils/blocs/appointment_bloc/state.dart';
@@ -17,7 +18,7 @@ class MedicineTimingWidget extends StatelessWidget {
     TextEditingController? medicineTimeController = TextEditingController();
     TextEditingController? medicineFromController = TextEditingController();
     TextEditingController? medicineToController = TextEditingController();
-    String? repetitions = 'repetitions';
+    String? repetitions = 'Daily';
     return BlocConsumer<AppointmentBloc, AppointmentStates>(
       listener: (context, state) {
         // TODO: implement listener
@@ -36,7 +37,7 @@ class MedicineTimingWidget extends StatelessWidget {
                     image: AssetImage('assets/images/medicine.jpg'),
                   ),
                   Padding(
-                    padding: const EdgeInsets.all(10.0),
+                    padding: const EdgeInsets.all(16.0),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -253,15 +254,15 @@ class MedicineTimingWidget extends StatelessWidget {
             ),
             floatingActionButton: FloatingActionButton(
               onPressed: () {
-                cubit.saveMedicineData(
-                    userID: '1',
+                if(state is SaveMedicineDataSuccessState){
+                  cubit.saveMedicineData(
+                    userID: AuthenticationBloc.get(context).userModel.uId!,
                     medicineName: medicineNameController.text,
                     medicineTime: medicineTimeController.text,
                     medicineFrom: medicineFromController.text,
                     medicineTo: medicineToController.text,
                     repetition: repetitions!,
-                );
-                if(state is SaveMedicineDataSuccessState){
+                  );
                   showToast(
                     msg: 'Medicine added successfully',
                     state: ToastState.SUCCESS,

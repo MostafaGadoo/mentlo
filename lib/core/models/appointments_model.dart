@@ -4,6 +4,8 @@ class AppointmentModel {
   final String Uid;
   final String doctorId;
   final String appointmentId;
+  final String doctorName;
+  final String doctorSpecialization;
 
   AppointmentModel({
     required this.date,
@@ -11,6 +13,8 @@ class AppointmentModel {
     required this.Uid,
     required this.doctorId,
     required this.appointmentId,
+    required this.doctorName,
+    required this.doctorSpecialization,
   });
 
   factory AppointmentModel.fromJson(Map<String, dynamic> json) {
@@ -20,6 +24,8 @@ class AppointmentModel {
       Uid: json['Uid'],
       doctorId: json['doctorId'],
       appointmentId: json['appointmentId'],
+      doctorName: json['doctorName'],
+      doctorSpecialization: json['doctorSpecialization'],
     );
   }
 
@@ -30,6 +36,8 @@ class AppointmentModel {
       'Uid': Uid,
       'doctorId': doctorId,
       'appointmentId': appointmentId,
+      'doctorName': doctorName,
+      'doctorSpecialization': doctorSpecialization,
     };
   }
 }

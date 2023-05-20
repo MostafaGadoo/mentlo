@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mentlo/core/utils/authentication_bloc/cubit.dart';
@@ -348,6 +349,7 @@ class SignUpWidget extends StatelessWidget {
                               name: usernameController.text,
                               phone: phoneController.text,
                             );
+                            cubit.getUserData(uId: FirebaseAuth.instance.currentUser!.uid);
                           }
                         },
                         child: const Text(
